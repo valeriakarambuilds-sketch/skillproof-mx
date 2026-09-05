@@ -5,7 +5,7 @@ const terms = ["ingresos", "margen", "ebitda", "rentabilidad", "crecimiento", "c
 export function simulatedExplanation(text: string): ExplanationResult {
   const lower = text.toLowerCase();
   const found = terms.filter((term) => lower.includes(term));
-  const score = Math.min(30, 8 + found.length * 3 + (text.length >= 180 ? 4 : 0));
+  const score = Math.min(40, 10 + found.length * 4 + (text.length >= 180 ? 4 : 0));
   return {
     score,
     feedback: found.length >= 3

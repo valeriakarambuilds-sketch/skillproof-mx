@@ -13,7 +13,7 @@ describe("transparent grading",()=>{
   it("awards all deterministic points to correct formulas",()=>expect(gradeCells(formulas)).toMatchObject({accuracy:35,traceability:25}));
   it("does not award traceability to hardcoded answers",()=>expect(gradeCells(Object.fromEntries(Object.entries(formulas).map(([k,v])=>[k,{value:v.value}]))).traceability).toBe(0));
   it("keeps the decision boundary visible",()=>{expect(69>=70).toBe(false);expect(70>=70).toBe(true)});
-  it("clamps AI scores",()=>{expect(clampScore(42,30)).toBe(30);expect(clampScore(-3,30)).toBe(0)});
+  it("clamps AI scores",()=>{expect(clampScore(52,40)).toBe(40);expect(clampScore(-3,40)).toBe(0)});
   it("reads the downloadable workbook safely",()=>{
     const file=readFileSync("public/SkillProof_MX_Assessment.xlsx");
     expect(()=>parseWorkbook(file.buffer.slice(file.byteOffset,file.byteOffset+file.byteLength))).not.toThrow();

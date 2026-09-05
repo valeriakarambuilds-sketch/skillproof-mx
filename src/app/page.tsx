@@ -75,7 +75,7 @@ export default function Home() {
         {result && <section className="results" aria-live="polite">
           <div className="resulthead"><div className="score"><b>{result.total}</b><span>/100</span></div><div><p className="eyebrow">RESULTADO</p><h2>{result.outcome}</h2><p>{result.nextStep}</p></div></div>
           {result.explanation.simulated && <p className="simulated">🎭 Evaluación de explicación simulada para esta demostración.</p>}
-          <div className="breakdown"><div><span>Exactitud</span><b>{result.accuracy}/35</b></div><div><span>Trazabilidad</span><b>{result.traceability}/25</b></div><div><span>Explicación</span><b>{result.explanation.score}/30</b></div></div>
+          <div className="breakdown"><div><span>Exactitud</span><b>{result.accuracy}/35</b></div><div><span>Trazabilidad</span><b>{result.traceability}/25</b></div><div><span>Explicación</span><b>{result.explanation.score}/40</b></div></div>
           <h3>Evidencia que encontramos</h3>
           <ul className="checks">{result.checks.map((check) => <li key={check.label}><span>{check.earned === check.possible ? "✓" : "!"}</span><div><b>{check.label}</b><small>{check.evidence}</small></div><strong>{check.earned}/{check.possible}</strong></li>)}</ul>
           <div className="feedback"><b>Sobre tu explicación</b><p>{result.explanation.feedback}</p></div>
