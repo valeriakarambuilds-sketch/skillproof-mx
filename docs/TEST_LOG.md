@@ -21,3 +21,5 @@
 **Issue found:** The fallback remained active because the app used the legacy content-generation call with a retired default model.
 
 **Fix:** Migrated to the current Interactions API, required a structured JSON response, disabled server-side interaction storage, and retained the clearly labeled simulated fallback.
+
+**Authentication retest:** Vercel logs returned HTTP 400 because the free AI Studio key was not accepted by the Interactions endpoint. The app was moved to the still-supported `generateContent` endpoint with the current model and the same required JSON schema.

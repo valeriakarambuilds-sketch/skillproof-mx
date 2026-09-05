@@ -10,22 +10,23 @@ const explanationSchema = z.string().trim().min(50).max(1000);
 async function scoreExplanation(text: string) {
   if (!process.env.GEMINI_API_KEY) return simulatedExplanation(text);
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-  const response = await ai.interactions.create({
+  const response = await ai.models.generateContent({
     model: process.env.GEMINI_MODEL || "gemini-3.8-flash",
-    input: `Evalúa esta explicación financiera ficticia. Criterios: interpretación 18, recomendación 12, claridad y límites 10. No evalúes estilo personal ni inventes datos. Texto: ${JSON.stringify(text)}`,
-    store: false,
-    response_mime_type: "application/json",
-    response_format: {
-      type: "object",
-      properties: {
-        score: { type: "number", minimum: 0, maximum: 40 },
-        feedback: { type: "string" },
-        evidence: { type: "array", items: { type: "string" } },
+    contents: `Evalúa esta explicación financiera ficticia. Criterios: interpretación 18, recomendación 12, claridad y límites 10. No evalúes estilo personal ni inventes datos. Texto: ${JSON.stringify(text)}`,
+    config: {
+      responseMimeType: "application/json",
+      responseJsonSchema: {
+        type: "object",
+        properties: {
+          score: { type: "number", minimum: 0, maximum: 40 },
+          feedback: { type: "string" },
+          evidence: { type: "array", items: { type: "string" } },
+        },
+        required: ["score", "feedback", "evidence"],
       },
-      required: ["score", "feedback", "evidence"],
     },
   });
-  const raw = (response.outputs || []).filter((item: any) => item.type === "text").map((item: any) => item.text).join("").trim();
+  const raw = (response.text || "").trim();
   const parsed = JSON.parse(raw);
   return { score: clampScore(Number(parsed.score), 40), feedback: String(parsed.feedback || ""), evidence: Array.isArray(parsed.evidence) ? parsed.evidence.map(String).slice(0, 5) : [], simulated: false };
 }
