@@ -19,3 +19,4 @@ Run the app locally, upload the completed fictional assessment, record the first
 - After the first production deployment, a rubric-total mismatch was found: the interface promised 100 possible points while the API capped the result at 90.
 - The explanation category now carries 40 points total, matching the visible 30-point interpretation/recommendation category plus 10-point clarity/limits category.
 - The correction is documented in `docs/TEST_LOG.md` and will trigger the second production deployment.
+- Migrated Gemini text scoring to the current Interactions API with a required JSON schema, `store: false`, and the configured `gemini-3.8-flash` model.

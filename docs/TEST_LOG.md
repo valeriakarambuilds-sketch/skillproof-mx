@@ -13,3 +13,11 @@
 **Verification:** Automated tests pass, the production build succeeds, and `npm audit` reports 0 vulnerabilities.
 
 **Redeployment:** Pending second production deployment after commit and push.
+
+## LLM integration check
+
+**Test performed:** Added the Gemini API key only through Vercel environment variables and submitted the fictional workbook plus a valid explanation.
+
+**Issue found:** The fallback remained active because the app used the legacy content-generation call with a retired default model.
+
+**Fix:** Migrated to the current Interactions API, required a structured JSON response, disabled server-side interaction storage, and retained the clearly labeled simulated fallback.

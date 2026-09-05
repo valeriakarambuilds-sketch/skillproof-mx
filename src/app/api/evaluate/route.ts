@@ -10,13 +10,24 @@ const explanationSchema = z.string().trim().min(50).max(1000);
 async function scoreExplanation(text: string) {
   if (!process.env.GEMINI_API_KEY) return simulatedExplanation(text);
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-  const response = await ai.models.generateContent({
-    model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
-    contents: `Evalúa esta explicación financiera ficticia. Devuelve SOLO JSON con score (0-30), feedback breve y evidence (arreglo de frases). Criterios: interpretación 12, recomendación 10, claridad y límites 8. No evalúes estilo personal ni inventes datos. Texto: ${JSON.stringify(text)}`,
+  const response = await ai.interactions.create({
+    model: process.env.GEMINI_MODEL || "gemini-3.8-flash",
+    input: `Evalúa esta explicación financiera ficticia. Criterios: interpretación 18, recomendación 12, claridad y límites 10. No evalúes estilo personal ni inventes datos. Texto: ${JSON.stringify(text)}`,
+    store: false,
+    response_mime_type: "application/json",
+    response_format: {
+      type: "object",
+      properties: {
+        score: { type: "number", minimum: 0, maximum: 40 },
+        feedback: { type: "string" },
+        evidence: { type: "array", items: { type: "string" } },
+      },
+      required: ["score", "feedback", "evidence"],
+    },
   });
-  const raw = (response.text || "").replace(/```json|```/g, "").trim();
+  const raw = (response.outputs || []).filter((item: any) => item.type === "text").map((item: any) => item.text).join("").trim();
   const parsed = JSON.parse(raw);
-  return { score: clampScore(Number(parsed.score), 30), feedback: String(parsed.feedback || ""), evidence: Array.isArray(parsed.evidence) ? parsed.evidence.map(String).slice(0, 5) : [], simulated: false };
+  return { score: clampScore(Number(parsed.score), 40), feedback: String(parsed.feedback || ""), evidence: Array.isArray(parsed.evidence) ? parsed.evidence.map(String).slice(0, 5) : [], simulated: false };
 }
 
 export async function POST(request: Request) {
@@ -30,7 +41,10 @@ export async function POST(request: Request) {
     const deterministic = gradeCells(parseWorkbook(await file.arrayBuffer()));
     let explanationResult;
     try { explanationResult = await scoreExplanation(explanation); }
-    catch { explanationResult = { ...simulatedExplanation(explanation), feedback: "La IA no respondió; mostramos una evaluación simulada y conservamos la evidencia verificable del Excel." }; }
+    catch (error) {
+      console.error("Gemini scoring failed", error instanceof Error ? error.message : "Unknown error");
+      explanationResult = { ...simulatedExplanation(explanation), feedback: "La IA no respondió; mostramos una evaluación simulada y conservamos la evidencia verificable del Excel." };
+    }
     const total = clampScore(deterministic.accuracy + deterministic.traceability + explanationResult.score, 100);
     return NextResponse.json({
       total,
