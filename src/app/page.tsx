@@ -53,7 +53,7 @@ export default function Home() {
             <p className="number">PASO 1</p><h2>Descarga y completa la tarea</h2>
             <p>Calcula crecimiento, utilidad bruta, EBITDA y márgenes en las celdas azules. Conserva tus fórmulas.</p>
             <a className="download" href="/SkillProof_MX_Assessment.xlsx" download>↓ Descargar plantilla Excel</a>
-            <details><summary>Ver instrucciones completas</summary><ol><li>No cambies el nombre de la hoja “Assessment”.</li><li>Escribe fórmulas en B11:B20.</li><li>Guarda el archivo como .xlsx.</li></ol></details>
+            <details><summary>Ver instrucciones completas</summary><ol><li>No cambies el nombre de la hoja “Assessment”.</li><li>B11: crecimiento de ingresos de 2025 a 2026.</li><li>B12–B15: utilidad bruta y margen bruto de cada año.</li><li>B16–B19: EBITDA y margen EBITDA de cada año.</li><li>B20: cambio del margen EBITDA de 2025 a 2026.</li><li>Escribe fórmulas en B11:B20 y guarda el archivo como .xlsx.</li></ol><p><b>Aceptamos fórmulas equivalentes:</b> si otra fórmula produce el resultado correcto y permanece visible, también cuenta como evidencia trazable.</p></details>
           </section>
 
           <section className="card rubric">
@@ -66,7 +66,8 @@ export default function Home() {
         <form className="card upload" onSubmit={submit}>
           <p className="number">PASO 2</p><h2>Entrega tu evidencia</h2>
           <label className="filebox"><input type="file" accept=".xlsx" onChange={(event) => setFile(event.target.files?.[0] || null)} /><span className="fileicon">X</span><span><b>{file ? file.name : "Selecciona tu archivo .xlsx"}</b><small>{file ? `${(file.size / 1024).toFixed(0)} KB · listo para evaluar` : "Máximo 2 MB. No aceptamos datos personales reales."}</small></span></label>
-          <label htmlFor="explanation"><b>Explica tu recomendación en 3–6 oraciones</b><small>¿Qué cambió entre 2025 y 2026? ¿Qué harías y qué limitación ves?</small></label>
+          <p className="uploadhelp">Puedes seleccionar otro archivo antes de evaluar y repetir la prueba después de ver tu resultado.</p>
+          <label htmlFor="explanation"><b>Explica tu recomendación en 3–6 oraciones</b><small>¿Qué cambió entre 2025 y 2026? ¿Qué harías? Menciona una limitación de los datos, del periodo analizado o de algún supuesto.</small></label>
           <textarea id="explanation" minLength={50} maxLength={1000} required value={explanation} onChange={(event) => setExplanation(event.target.value)} placeholder="Ejemplo: Aunque los ingresos…, el margen… Por eso recomiendo… Esta conclusión está limitada por…" />
           <div className="formfoot"><span>{explanation.length}/1000 caracteres</span><button disabled={loading}>{loading ? "Evaluando…" : "Evaluar mi evidencia →"}</button></div>
           {error && <p className="error" role="alert">{error}</p>}

@@ -23,3 +23,15 @@
 **Fix:** Migrated to the current Interactions API, required a structured JSON response, disabled server-side interaction storage, and retained the clearly labeled simulated fallback.
 
 **Authentication retest:** Vercel logs returned HTTP 400 because the free AI Studio key was not accepted by the Interactions endpoint. The app was moved to the still-supported `generateContent` endpoint with the current model and the same required JSON schema.
+
+## Persona pass — Sofía Martínez
+
+**Persona:** A 23-year-old recent graduate in Mexico applying for a junior financial analyst role. She knows basic Excel, reads slowly, distrusts automated hiring, and quits silently when instructions are unclear.
+
+**Confusions observed:** She could not confirm which calculation belonged in each answer cell, whether an equivalent formula would be accepted, whether she could replace or resubmit a file, or whether “limitación” referred to the data, her analysis, or the company.
+
+**Worst confusion selected:** Ambiguous cell-by-cell expectations could make her abandon before uploading any evidence.
+
+**Fix:** Expanded the instructions with the required calculation for B11:B20, explicitly accepted equivalent formulas, stated that files can be replaced and the assessment repeated, and clarified the allowed types of limitation.
+
+**Retest:** Pending with the same persona after deployment.

@@ -20,3 +20,4 @@ Run the app locally, upload the completed fictional assessment, record the first
 - The explanation category now carries 40 points total, matching the visible 30-point interpretation/recommendation category plus 10-point clarity/limits category.
 - The correction is documented in `docs/TEST_LOG.md` and will trigger the second production deployment.
 - Use Gemini `generateContent` with a required JSON schema and the configured `gemini-3.8-flash` model because the free AI Studio key is not accepted by the Interactions endpoint.
+- Persona testing prioritized clearer assessment directions: candidates now see the exact cell groups, know equivalent formulas are accepted, can replace or retry, and understand what “limitation” means.
