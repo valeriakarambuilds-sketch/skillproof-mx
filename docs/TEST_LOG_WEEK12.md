@@ -22,3 +22,14 @@ Configured Supabase OAuth/RLS A-B account tests, real-domain checks, 2 actual Ve
 Dependency maintenance: upgraded inherited Next.js to 16.4.3 and Vitest to 5.0.5 after audit findings. Nine tests and the production compilation passed on the updated dependency tree. Live verification remains pending.
 
 Final npm audit: 0 vulnerabilities across production and development dependencies. No production deploy or authenticated browser test is implied by this result.
+
+## Live continuation after account connections
+- Supabase semestre restored to ACTIVE_HEALTHY; created only public.skillproof_reports, with RLS and SELECT/INSERT/DELETE ownership policies. Existing public.test left unchanged.
+- Transactional database test: fictional A/B users saw only their own report; B could not insert or delete an A-owned row; anonymous reads denied. All fixture rows and auth records rolled back. This tests database policy enforcement, not Google OAuth.
+- Configured Supabase public URL and publishable key as Vercel environment variables for preview and production; no service-role key used.
+- Deployment before env configuration: dpl_4wguwwjTaY4fB7NqPYFyo3kC6Fhf, READY, commit 2d9b6dc56844eea2b6b912b4a19828a1cdd378bf.
+- Deployment after configuration: dpl_12FX9QLnaFcoWENoNYdRL8y13dvW, READY, same source and updated environment.
+- Browser confirmed the UI loads and the Google button navigates to an unsupported-provider error. Public Supabase settings confirm external.google=false.
+- Fix: preflight provider availability and show an in-page error preserving the task rather than sending the candidate to a raw JSON error page. Retest and redeploy follow this commit.
+- Google OAuth client ID/secret and redirect allowlist still require account configuration. No successful OAuth or authenticated save/reload was claimed.
+- Owner confirmed no custom domain is currently owned; the real-domain milestone remains pending. No purchase or protection change performed.

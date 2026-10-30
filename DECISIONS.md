@@ -47,3 +47,10 @@ Final npm audit: 0 vulnerabilities across production and development dependencie
 - Use the dedicated skillproof_reports table to isolate this feature from existing semester tables.
 - Added fictional completed and incorrect workbook fixtures; pinned supabase-js package version.
 - Vercel project found, but its team grant is still denied (403). Team consent link supplied; no deployment claimed.
+
+## Live connection session close
+- Applied the skillproof_private_evidence_reports migration to the owner-selected semestre project; RLS isolation tests passed with complete rollback of invented fixtures.
+- Published preview with Supabase environment configuration; existing Gemini environment variables preserved.
+- Google is disabled in Supabase; do not replace the required Google flow with another auth method. Preserve the task with a contextual in-page error until the owner provides provider configuration through their dashboard.
+- No custom domain is owned yet. Domain acquisition/assignment and Google credentials are the next external setup actions.
+- Next first move: owner enables the Google provider and valid redirect URLs, then verify OAuth, upload, saved report recovery, export and full persona walkthrough before promoting to production.

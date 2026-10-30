@@ -19,6 +19,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [review, setReview] = useState(false);
+  const [authError,setAuthError]=useState("");
   const [token,setToken]=useState("");
   const [ready,setReady]=useState(false);
   useEffect(()=>{
@@ -30,8 +31,15 @@ export default function Home() {
   },[]);
   async function login(){
     if(!supabase)return;
-    const {error}=await supabase.auth.signInWithOAuth({provider:"google",options:{redirectTo:window.location.origin}});
-    if(error)setError("No se pudo iniciar sesión con Google.");
+    setAuthError("");
+    try {
+      const response=await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/settings`,{headers:{apikey:process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||""}});
+      if(!response.ok)throw new Error("No se pudo comprobar el inicio de sesión. Intenta de nuevo.");
+      const settings=await response.json();
+      if(!settings.external?.google){setAuthError("El acceso con Google aún no está habilitado. No se envió tu archivo ni se creó una evaluación. Puedes revisar la tarea mientras se activa el acceso.");return;}
+      const {error}=await supabase.auth.signInWithOAuth({provider:"google",options:{redirectTo:window.location.origin}});
+      if(error)throw new Error("No se pudo iniciar sesión con Google. Intenta de nuevo.");
+    }catch(caught){setAuthError(caught instanceof Error?caught.message:"No se pudo iniciar sesión con Google.");}
   }
   async function restore(){
     setError("");
@@ -77,6 +85,7 @@ export default function Home() {
         <div className="authbar rounded-xl border border-slate-200 bg-white p-4">
          {!ready?<p>Comprobando sesión…</p>:!supabase?<p><b>DEMO · DATOS FICTICIOS.</b> Supabase no está configurado: sin inicio de sesión ni guardado.</p>:token?<><p>Sesión activa · reportes privados</p><button type="button" onClick={restore}>Recuperar mi último reporte</button><button type="button" className="secondary" onClick={()=>supabase?.auth.signOut()}>Cerrar sesión</button></>:<><p>Inicia sesión para guardar y recuperar tu evidencia.</p><button type="button" onClick={login}>Continuar con Google</button></>}
         </div>
+        {authError && <p className="error" role="alert">{authError}</p>}
         <section className="notice"><b>Esta no es una clase ni un examen escolar.</b><span> No te explicaremos finanzas: evaluaremos evidencia concreta de tu trabajo.</span></section>
 
         <div className="grid">
