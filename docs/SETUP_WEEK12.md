@@ -33,7 +33,7 @@ Import the existing GitHub repository, select Next.js, install with npm ci and b
 7 Fresh-chat persona walks real screenshots of every stage; fix worst issue and retest. The provided preliminary mockup review does not replace this.
 
 ## Git history
-The ZIP began without .git. The working checkout now has five substantive local commits. They are not GitHub pushes. The archive contains a git bundle so history is reviewable. Do not force-push over an existing repo. Integrate changes on a new branch, resolve differences with the existing source, push and use the real GitHub URL in submission.
+The ZIP began without .git. The working checkout now has at least five substantive local commits. They are not GitHub pushes. The archive contains a git bundle so history is reviewable. Do not force-push over an existing repo. Integrate changes on a new branch, resolve differences with the existing source, push and use the real GitHub URL in submission.
 
 ## Session close
 Use DECISIONS.md and docs/TEST_LOG_WEEK12.md. No credentials belong in the build transcript.

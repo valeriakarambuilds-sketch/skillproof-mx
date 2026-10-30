@@ -20,3 +20,5 @@ Retest: wording reviewed against the reported confusion; live screenshot walkthr
 Configured Supabase OAuth/RLS A-B account tests, real-domain checks, 2 actual Vercel deployments, fresh-chat persona test on live screenshots and demo recording.
 
 Dependency maintenance: upgraded inherited Next.js to 16.4.3 and Vitest to 5.0.5 after audit findings. Nine tests and the production compilation passed on the updated dependency tree. Live verification remains pending.
+
+Final npm audit: 0 vulnerabilities across production and development dependencies. No production deploy or authenticated browser test is implied by this result.
