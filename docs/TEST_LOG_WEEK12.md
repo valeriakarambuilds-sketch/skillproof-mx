@@ -33,3 +33,7 @@ Final npm audit: 0 vulnerabilities across production and development dependencie
 - Fix: preflight provider availability and show an in-page error preserving the task rather than sending the candidate to a raw JSON error page. Retest and redeploy follow this commit.
 - Google OAuth client ID/secret and redirect allowlist still require account configuration. No successful OAuth or authenticated save/reload was claimed.
 - Owner confirmed no custom domain is currently owned; the real-domain milestone remains pending. No purchase or protection change performed.
+
+### Live bug-fix-redeploy retest
+Deployment dpl_9RNknHpfVjeFTkGNwdznqQYx8eBS reached READY for commit e05a92b01b0ce5142bd9f8774a8fa8abe7a29d7d. Browser clicking Google now leaves the user on SkillProof and displays the contextual provider-unavailable message. The raw Supabase error-page redirect no longer occurs. Core upload/save/reload remains blocked until Google provider setup, rather than being counted as a successful end-to-end test.
+A local Turbopack persistence-cache error was resolved by moving the generated .next cache aside; the clean production build passed. Nine automated tests remain passing.

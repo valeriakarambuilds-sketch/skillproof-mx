@@ -54,3 +54,6 @@ Final npm audit: 0 vulnerabilities across production and development dependencie
 - Google is disabled in Supabase; do not replace the required Google flow with another auth method. Preserve the task with a contextual in-page error until the owner provides provider configuration through their dashboard.
 - No custom domain is owned yet. Domain acquisition/assignment and Google credentials are the next external setup actions.
 - Next first move: owner enables the Google provider and valid redirect URLs, then verify OAuth, upload, saved report recovery, export and full persona walkthrough before promoting to production.
+
+### Verified final state of this continuation
+Live preview retest passed after the provider-unavailable fix; deployment dpl_9RNknHpfVjeFTkGNwdznqQYx8eBS is READY. Database owner-isolation and anonymous-access checks passed with rolled-back fictional data. Google provider configuration and a custom domain remain blockers to the complete milestone. Owner requests step-by-step help creating a Google OAuth client; next move is create/select the SkillProof MX Google Cloud project, then OAuth consent and web client settings. No OAuth client secret should be put in chat or source.
