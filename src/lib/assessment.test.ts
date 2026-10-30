@@ -19,3 +19,9 @@ describe("transparent grading",()=>{
     expect(()=>parseWorkbook(file.buffer.slice(file.byteOffset,file.byteOffset+file.byteLength))).not.toThrow();
   });
 });
+
+describe("Week 12 evidence regression", () => {
+ it("does not trust a formula merely because a cached answer is correct", () => {
+  expect(gradeCells({ B11: {value:.2,formula:"=1+1"} }).traceability).toBe(0);
+ });
+});
