@@ -37,3 +37,7 @@ Final npm audit: 0 vulnerabilities across production and development dependencie
 ### Live bug-fix-redeploy retest
 Deployment dpl_9RNknHpfVjeFTkGNwdznqQYx8eBS reached READY for commit e05a92b01b0ce5142bd9f8774a8fa8abe7a29d7d. Browser clicking Google now leaves the user on SkillProof and displays the contextual provider-unavailable message. The raw Supabase error-page redirect no longer occurs. Core upload/save/reload remains blocked until Google provider setup, rather than being counted as a successful end-to-end test.
 A local Turbopack persistence-cache error was resolved by moving the generated .next cache aside; the clean production build passed. Nine automated tests remain passing.
+
+## Owner-run live flow — 2026-10-30
+Owner reported Google session and latest-report recovery working. Three exported JSON reports support correct→intentional error→correction: 86→80→86, all saved=true. B11 =1+1 recalculated to 2 versus expected 0.2 and was contradictory; restored =(C5-B5)/B5 verified at 0.2. Screenshots confirm the correct report and submission text. This intentional input test is separate from an application bug.
+Persona-found application bug: simulated feedback demanded missing figures and limitations despite their presence in submitted text. Removed this unsupported claim and clarified simulation/retry behavior. Deployed screenshot retest pending.

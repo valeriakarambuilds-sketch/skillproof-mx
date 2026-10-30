@@ -57,3 +57,6 @@ Final npm audit: 0 vulnerabilities across production and development dependencie
 
 ### Verified final state of this continuation
 Live preview retest passed after the provider-unavailable fix; deployment dpl_9RNknHpfVjeFTkGNwdznqQYx8eBS is READY. Database owner-isolation and anonymous-access checks passed with rolled-back fictional data. Google provider configuration and a custom domain remain blockers to the complete milestone. Owner requests step-by-step help creating a Google OAuth client; next move is create/select the SkillProof MX Google Cloud project, then OAuth consent and web client settings. No OAuth client secret should be put in chat or source.
+
+## Session close — persona screenshot review, 2026-10-30
+Google setup now completed by owner; successful upload, save, recovery and 86→80→86 correction cycle evidenced by exported reports and owner statements. Fresh synthetic screenshot review found contradictory generic simulated feedback. Clarify heuristic scoring and private retry history, move feedback upward, remove unsupported criticism. No real participant or browser persona clicks claimed. Next first move: verify deployed persona fix with fresh screenshots, then production/domain and final submission artifacts.
