@@ -73,3 +73,11 @@ Google setup now completed by owner; successful upload, save, recovery and 86→
 - PDF transcript retains first-PERSONA cutoff; later evidence is a labeled factual addendum, not a verbatim continuation.
 - Remaining gates: owned domain/public access, complete Crystal Ball Brief, two-session Google/API test, old-secret revocation evidence, demo recording, start-screen threshold ambiguity.
 - Next first move: supply missing access and retry screens and confirm owned-domain choice/ownership, then complete live checks.
+
+## Public production release - 30 October 2026
+- User authorized publishing updated production after private preview failed in incognito.
+- Deployed e679b6c2f5b2f09317c554c9bbbe5ab2c24ac111 to production: dpl_WHjTAubJUcHG4K1WreTcTajXduRn, READY, alias https://skillproof-mx.vercel.app/.
+- Changed Vercel authentication to Standard Protection (prod_deployment_urls_and_all_previews): primary production alias public; preview/generated deployment URLs protected.
+- Anonymous HTTP GET homepage returned 200; browser displayed SkillProof without Vercel login. Anonymous GET /api/reports returned 401 with sign-in-required error. Supabase auth/RLS retained.
+- Nine tests passed. Production uses existing production environment, including server-only Gemini settings; authenticated production evaluation was not retested in this release session.
+- Next first move: owner checks Google login, evaluation and private recovery on production; owned-domain and full submission gates remain separate.
