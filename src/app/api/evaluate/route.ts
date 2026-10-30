@@ -63,7 +63,7 @@ export async function POST(request: Request) {
       simulationOnly:explanationResult.simulated,
     };
     if(auth){
-      const {data,error}=await auth.client.from("reports").insert({user_id:auth.user.id,payload}).select("id").single();
+      const {data,error}=await auth.client.from("skillproof_reports").insert({user_id:auth.user.id,payload}).select("id").single();
       if(error)return NextResponse.json({...payload,saved:false,saveError:"El reporte se calculó, pero no se pudo guardar. Descárgalo y revisa la configuración de Supabase."});
       return NextResponse.json({...payload,saved:true,reportId:data.id},{headers:{"Cache-Control":"no-store"}});
     }

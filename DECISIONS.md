@@ -39,3 +39,11 @@ Obtain the actual GitHub repo URL, owned venture domain and account configuratio
 Dependency maintenance: upgraded inherited Next.js to 16.4.3 and Vitest to 5.0.5 after audit findings. Nine tests and the production compilation passed on the updated dependency tree. Live verification remains pending.
 
 Final npm audit: 0 vulnerabilities across production and development dependencies. No production deploy or authenticated browser test is implied by this result.
+
+## Connected-account continuation
+- GitHub repository confirmed: valeriakarambuilds-sketch/skillproof-mx. Published six commits to week12-core and opened draft PR #1.
+- The original ZIP source matches main; previous repository history is retained.
+- Owner selected the paused Supabase project semestre for storage. Restore requested; wait for ACTIVE_HEALTHY before DDL.
+- Use the dedicated skillproof_reports table to isolate this feature from existing semester tables.
+- Added fictional completed and incorrect workbook fixtures; pinned supabase-js package version.
+- Vercel project found, but its team grant is still denied (403). Team consent link supplied; no deployment claimed.
