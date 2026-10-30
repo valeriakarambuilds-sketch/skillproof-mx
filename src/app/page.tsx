@@ -105,7 +105,7 @@ export default function Home() {
         </form>
 
         {result && <section className="results" aria-live="polite">
-          <div className="resulthead"><div className="score"><b>{result.total}</b><span>/100</span></div><div><p className="eyebrow">RESULTADO</p><h2>{result.outcome}</h2><p>{result.nextStep}</p></div></div>
+          <p className="notice"><b>Este reporte evalúa tu archivo, no decide tu contratación.</b> Puedes corregir las celdas y volver a enviar tu Excel. Pendiente significa que falta comprobación; no hay una revisión solicitada automáticamente.</p><div className="resulthead"><div className="score"><b>{result.total}</b><span>/100</span></div><div><p className="eyebrow">RESULTADO</p><h2>{result.outcome}</h2><p>{result.nextStep}</p></div></div>
           {result.explanation.simulated && <p className="simulated">🎭 Evaluación de explicación simulada para esta demostración.</p>}
           <div className="breakdown"><div><span>Exactitud</span><b>{result.accuracy}/35</b></div><div><span>Trazabilidad</span><b>{result.traceability}/25</b></div><div><span>Explicación</span><b>{result.explanation.score}/40</b></div></div>
           <p>Verificado = cálculo y referencias comprobados en esta plantilla. Pendiente = falta evidencia o la fórmula requiere revisión. Contradictorio = el cálculo no coincide.</p>
@@ -114,7 +114,7 @@ export default function Home() {
           <ul className="checks">{result.checks.map((check) => <li key={check.label}><span>{check.earned === check.possible ? "✓" : "!"}</span><div><b>{check.label}</b><span className="evidence-state">{check.status}</span><small>{check.evidence}</small><code>{check.address} · {check.formula || "Sin fórmula"}</code><small>Esperado: {check.expected} · Recalculado/valor: {check.actual ?? "Pendiente"}</small></div><strong>{check.earned}/{check.possible}</strong></li>)}</ul>
           <div className="feedback"><b>Sobre tu explicación</b><p>{result.explanation.feedback}</p></div>
           <div className="limits"><b>Lo que esta prueba NO mide</b><p>No mide tu potencial, personalidad, contexto familiar, velocidad ni valor profesional. Solo presenta evidencia sobre esta tarea delimitada.</p></div>
-          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { setResult(null); scrollTo({ top: 0, behavior: "smooth" }); }}>Volver a intentar</button></div>
+          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { setResult(null); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir y volver a subir mi Excel</button></div>
         </section>}
       </section>
 

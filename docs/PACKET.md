@@ -78,7 +78,7 @@ No marketplace, resume ranking, payments, automatic hiring, surveillance, claim 
 | Source | GitHub | Reviewable commits and packet history |
 | Hosting | Vercel free tier | Two real deployments and venture domain |
 
-Current inherited code has Next.js/React and a deterministic parser; Tailwind, Supabase integration and real-domain configuration must be completed and verified. No service setup is claimed by this packet.
+Implementation status after the packet-first commit: Tailwind, the bounded evaluator, Google Auth integration, owner-scoped report save/retrieval and SQL RLS policies are coded. Supabase account configuration, OAuth, live data-isolation tests and the real-domain deployment remain unverified. No service setup is claimed by this packet.
 
 ## Security floor and data handling
 Secrets only in Vercel environment variables; never in source, reports or transcript. Google sign-in before persisting personal information. RLS on reports with auth.uid() = user_id for all operations. Validate file extension, bytes, uncompressed content, expected worksheet, source values and explanation length. Fictional seeds only, visibly labeled. Workbook bytes stay in memory and are discarded. Reports stored privately; logout clears displayed sensitive data. Test user A versus user B reads and updates before live use.
