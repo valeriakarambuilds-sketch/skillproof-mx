@@ -60,3 +60,9 @@ Live preview retest passed after the provider-unavailable fix; deployment dpl_9R
 
 ## Session close — persona screenshot review, 2026-10-30
 Google setup now completed by owner; successful upload, save, recovery and 86→80→86 correction cycle evidenced by exported reports and owner statements. Fresh synthetic screenshot review found contradictory generic simulated feedback. Clarify heuristic scoring and private retry history, move feedback upward, remove unsupported criticism. No real participant or browser persona clicks claimed. Next first move: verify deployed persona fix with fresh screenshots, then production/domain and final submission artifacts.
+
+## Technical evidence close - 30 October 2026
+- Verified remote Week 12 commit history and two READY Vercel preview deployments.
+- Re-ran transactional synthetic A/B database RLS check. A own=1, A reading B=0, B own=1, B reading A by known ID=0, B listing A owner=0. All passed. Fixtures rolled back. SQL and returned results committed in docs/evidence.
+- Scope: authenticated database role and distinct auth.uid claims, not two Google browser sessions. Do not equate own-report recovery with isolation.
+- Next first move: two-session Google/API isolation verification, then owned-domain/public access check and production promotion.
