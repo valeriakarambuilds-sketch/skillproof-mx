@@ -111,3 +111,6 @@ Deploy 1 after authenticated save works; deploy 2 after a documented bug fix and
 
 ## Submission status
 Live domain, GitHub URL, Vercel deployment IDs, Supabase ownership tests, fresh-chat persona, demo recording and complete transcript remain to be verified. No fabricated links, timestamps, users or deployment evidence.
+
+## Later verification addendum
+The preceding packet is the original plan and its historical status. See FINAL_STATUS_WEEK12.md for verified current results, benchmark source, commit/deployment links, A/B RLS test and unresolved submission gates. This does not retrospectively change the plan.

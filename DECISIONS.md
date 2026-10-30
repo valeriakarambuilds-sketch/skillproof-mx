@@ -66,3 +66,10 @@ Google setup now completed by owner; successful upload, save, recovery and 86→
 - Re-ran transactional synthetic A/B database RLS check. A own=1, A reading B=0, B own=1, B reading A by known ID=0, B listing A owner=0. All passed. Fixtures rolled back. SQL and returned results committed in docs/evidence.
 - Scope: authenticated database role and distinct auth.uid claims, not two Google browser sessions. Do not equate own-report recovery with isolation.
 - Next first move: two-session Google/API isolation verification, then owned-domain/public access check and production promotion.
+
+## Document audit close - 30 October 2026
+- Preserve original packet and append FINAL_STATUS_WEEK12.md, with verified benchmark and packet-first GitHub diff.
+- Preserve first persona test; add fresh ordered synthetic retest in PERSONA_ORDERED_RETEST_WEEK12.md. Login and post-click retry screens are missing and not invented.
+- PDF transcript retains first-PERSONA cutoff; later evidence is a labeled factual addendum, not a verbatim continuation.
+- Remaining gates: owned domain/public access, complete Crystal Ball Brief, two-session Google/API test, old-secret revocation evidence, demo recording, start-screen threshold ambiguity.
+- Next first move: supply missing access and retry screens and confirm owned-domain choice/ownership, then complete live checks.
