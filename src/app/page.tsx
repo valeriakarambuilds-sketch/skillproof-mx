@@ -2,6 +2,7 @@
 
 import { FormEvent, useState, useEffect } from "react";
 
+import PilotLog, { emitPilotEvent } from "@/components/PilotLog";
 import { supabase } from "@/lib/supabase-browser";
 
 type Result = {
@@ -43,7 +44,7 @@ export default function Home() {
   }
   async function restore(){
     setError("");
-    try{const response=await fetch("/api/reports",{headers:{Authorization:`Bearer ${token}`},cache:"no-store"});const data=await response.json();if(!response.ok)throw new Error(data.error);if(data.report)setResult({...data.report.payload,total:null,reviewStatus:"pending_human_review",outcome:"Resultado provisional · revisión humana pendiente",saved:true,reportId:data.report.id});else setError("Aún no tienes un reporte guardado.");}
+    try{const response=await fetch("/api/reports",{headers:{Authorization:`Bearer ${token}`},cache:"no-store"});const data=await response.json();if(!response.ok)throw new Error(data.error);if(data.report){setResult({...data.report.payload,total:null,reviewStatus:"pending_human_review",outcome:"Resultado provisional · revisión humana pendiente",saved:true,reportId:data.report.id});emitPilotEvent("report_opened");}else setError("Aún no tienes un reporte guardado.");}
     catch(caught){setError(caught instanceof Error?caught.message:"No se pudo recuperar el reporte.");}
   }
   function download(){
@@ -63,7 +64,9 @@ export default function Home() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "No pudimos evaluar tu evidencia.");
       setResult(data);
-    } catch (caught) { setError(caught instanceof Error ? caught.message : "Ocurrió un error."); }
+      emitPilotEvent("evaluation_completed");
+      emitPilotEvent("report_opened");
+    } catch (caught) { emitPilotEvent("submission_rejected"); setError(caught instanceof Error ? caught.message : "Ocurrió un error."); }
     finally { setLoading(false); }
   }
 
@@ -86,13 +89,14 @@ export default function Home() {
          {!ready?<p>Comprobando sesión…</p>:!supabase?<p><b>DEMO · DATOS FICTICIOS.</b> Supabase no está configurado: sin inicio de sesión ni guardado.</p>:token?<><p>Sesión activa · reportes privados</p><button type="button" onClick={restore}>Recuperar mi último reporte</button><button type="button" className="secondary" onClick={()=>supabase?.auth.signOut()}>Cerrar sesión</button></>:<><p>Inicia sesión para guardar y recuperar tu evidencia.</p><button type="button" onClick={login}>Continuar con Google</button></>}
         </div>
         {authError && <p className="error" role="alert">{authError}</p>}
+        <PilotLog />
         <section className="notice"><b>Esta no es una clase ni un examen escolar.</b><span> No te explicaremos finanzas: evaluaremos evidencia concreta de tu trabajo.</span></section>
 
         <div className="grid">
           <section className="card task">
             <p className="number">PASO 1</p><h2>Descarga y completa la tarea</h2>
             <p>Calcula crecimiento, utilidad bruta, EBITDA y márgenes en las celdas azules. Conserva tus fórmulas.</p>
-            <a className="download" href="/SkillProof_MX_Assessment.xlsx" download>↓ Descargar plantilla Excel</a>
+            <a className="download" href="/SkillProof_MX_Assessment.xlsx" onClick={() => emitPilotEvent("template_downloaded")} download>↓ Descargar plantilla Excel</a>
             <details><summary>Ver instrucciones completas</summary><ol><li>No cambies el nombre de la hoja “Assessment”.</li><li>B11: crecimiento de ingresos de 2025 a 2026.</li><li>B12–B15: utilidad bruta y margen bruto de cada año.</li><li>B16–B19: EBITDA y margen EBITDA de cada año.</li><li>B20: cambio del margen EBITDA de 2025 a 2026.</li><li>Escribe fórmulas en B11:B20 y guarda el archivo como .xlsx.</li></ol><p><b>Aceptamos fórmulas equivalentes:</b> comprobamos operaciones con +, −, ×, ÷, paréntesis, porcentajes y referencias de esta hoja. Funciones como SUMA, referencias externas u otras fórmulas quedan pendientes de revisión; no se penalizan como error demostrado.</p></details>
           </section>
 
@@ -124,7 +128,7 @@ export default function Home() {
           <h3>Evidencia que encontramos</h3>
           <ul className="checks">{result.checks.map((check) => <li key={check.label}><span>{check.earned === check.possible ? "✓" : "!"}</span><div><b>{check.label}</b><span className="evidence-state">{check.status}</span><small>{check.evidence}</small><code>{check.address} · {check.formula || "Sin fórmula"}</code><small>Esperado: {check.expected} · Recalculado/valor: {check.actual ?? "Pendiente"}</small></div><strong>{check.earned}/{check.possible}</strong></li>)}</ul>
           <div className="limits"><b>Lo que esta prueba NO mide</b><p>No mide tu potencial, personalidad, contexto familiar, velocidad ni valor profesional. Solo presenta evidencia sobre esta tarea delimitada.</p></div>
-          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { setResult(null); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
+          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { emitPilotEvent("retry_started"); setResult(null); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
         </section>}
       </section>
 
