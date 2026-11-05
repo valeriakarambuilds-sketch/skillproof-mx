@@ -1,116 +1,183 @@
-# SkillProof MX — Week 12 Core Build Packet
+# SkillProof MX — Week 13 Packet
 
-Prepared before Week 12 implementation. Founder: Valeria Karam Galland. Source: team blueprint supplied in this conversation. Charter: CHARTER.md. This packet supersedes the Week 4 packet, retained under week12/.
+Valeria Karam Galland | Real Humans | 5 November 2026
 
-## Problem in my words
-A CV does not show how a junior candidate solves an Excel task. A number or AI opinion alone also fails to show that evidence. I want every consequential finding to point to the work that supports it and identify what still needs human review.
+Planning document prepared before Week 13 application changes. Baseline inspected: `week12-core`, tree `bd218f3b7b0eff9af0b6f0b6462c4c9e593d4c26`. Live URL: https://skillproof-mx.vercel.app/ . Repository: https://github.com/valeriakarambuilds-sketch/skillproof-mx . A custom owned domain is not confirmed. This document does not claim completed user sessions, fixes, deployments or review availability.
 
-## Exact user
-A Spanish-speaking recent graduate in Mexico applying for a junior financial analyst role, familiar with basic Excel but uncertain about automated hiring. The secondary actor is the human reviewer; the product does not assume a paid review service exists.
+## 1. Problem in my words
 
-## Definition of success
-Before the module closes, a user can open the real venture domain, sign in with Google, download the fictional workbook, upload completed evidence, inspect verified/contradictory/pending findings linked to cells and formulas, save the report privately, reload it and export it. Retry replaces the current displayed attempt without defining the person's identity. Success requires the live domain and end-to-end storage tests, not just a local build.
+Reviewing a junior financial analyst's Excel test requires checking calculations, formulas and reasoning. Automating calculations helps only if candidates understand the feedback and reviewers spend less time without overlooking valid alternative methods. A polished score can hide unresolved evidence; this week measures those failures with real users.
 
-## Image-generated mockup
-![Week 12 evidence report concept](../assets/week12-core-mockup.png)
+## 2. Exact user
 
-Design intent: navy/teal evidence table; no permanent identity score; three evidence states; visible fictional-data label; export and retry. This is a design concept, not evidence of deployment. The original Week 4 generated concept remains in assets/skillproof-mx-results-mockup.png.
+Primary: Spanish-speaking students or recent graduates in Mexico interested in junior financial analyst roles, with basic Excel experience. Recruit five relevant participants, no classmates, including at least three strangers. Secondary: Valeria as pilot operator and a qualified analyst who validates the rubric and handles unresolved reasoning or formula questions. Analyst availability must be confirmed before collecting attempts that require promised review. Use fictional company data only.
 
-## Core flow
+## 3. Success before the module closes
+
+Five real participants attempt the same defined workflow without coaching: download the case, complete it, submit evidence, read feedback and explain what remains provisional. Record role, task, struggles, exact quotes, assistance, completion and version. Rank the three worst findings, fix the highest-priority pain, redeploy and retest that task with before/after evidence. Obtain one authentic return signal. Complete a separate fresh-chat synthetic-persona pass and a documented mechanical bug-fix-redeploy cycle. Publish at least five substantive commits and two actual deployments; capture their IDs rather than treating this plan as evidence.
+
+Exploratory gates: zero observed confirmed grading-rule errors left unresolved; at least four of five participants independently distinguish verified calculations from pending human review. Five sessions cannot establish broad assessment validity or a universal saving.
+
+## 4. Image-generated mockup
+
+Reuse the image-generated Week 12 evidence-report concept as the visual baseline; it is a design concept, not a screenshot or a new Week 13 generated asset.
+
+![Existing generated evidence-report concept](https://raw.githubusercontent.com/valeriakarambuilds-sketch/skillproof-mx/week12-core/assets/week12-core-mockup.png)
+
+Week 13 design delta: a prominent “Resultado provisional” notice; separate verified numerical checks and pending reasoning; specific next actions; a short optional feedback form. A return action may offer a reviewed equivalent case only when that case and reviewer are available. Do not imply that a button establishes a staffed appeal service.
+
+## 5. Feature flow
+
 ```mermaid
 flowchart TD
- A[Google sign-in] --> B[Download fictional task]
- B --> C[Upload workbook]
- C --> D{Valid file and source data?}
- D -->|No| E[Specific error and retry]
- E --> C
- D -->|Yes| F[Inspect cells and formulas]
- F --> G[Classify evidence]
- G --> H[Review uncertainties]
- H --> I[Save private report]
- I --> J[Reload or export]
+ A[Open fictional case] --> B[Complete Excel and explanation]
+ B --> C{Valid submission?}
+ C -->|No| D[Specific error and retry]
+ D --> B
+ C -->|Yes| E[Check supported calculations]
+ E --> F[Show provisional report]
+ F --> G[Human reviews unresolved evidence]
+ G --> H[Record reviewed result]
+ F --> I[Optional feedback]
+ H --> J[Offer equivalent case when available]
 ```
 
-## Actor swimlane
+## 6. Actor swimlane
+
 ```mermaid
 flowchart TD
  subgraph Candidate
- A[Sign in and upload]
- H[Inspect report and retry]
+ A[Complete fictional task]
+ B[Explain report and give feedback]
+ C[Return for equivalent task]
  end
- subgraph System
- B[Validate workbook]
- C[Check calculations and references]
- D[Separate three evidence states]
+ subgraph Application
+ D[Validate and check calculations]
+ E[Show provisional status]
+ F[Record bounded events]
  end
- subgraph Supabase
- E[Authenticate user]
- F[Enforce row ownership]
- G[Save and retrieve report]
+ subgraph Operator
+ G[Observe without coaching]
+ H[Rank pain and measure effort]
+ I[Ship fix and retest]
  end
- subgraph Human_reviewer
- I[Interpret unresolved evidence]
- J[Make consequential decision]
+ subgraph Analyst
+ J[Validate rubric]
+ K[Review ambiguity and reasoning]
  end
- A --> E --> B --> C --> D --> H
- H --> F --> G --> H
- H --> I --> J
+ J --> D
+ A --> D --> E --> B
+ D --> F
+ B --> G --> H --> I
+ E --> K --> E
+ B --> C
 ```
 
-## Benchmark line
-Best-existing-solution candidate: TestGorilla's Financial Modeling in Excel assessment, previously selected in the Week 4 packet: https://www.testgorilla.com/test-library/role-specific-skills-tests/financial-modeling-in-excel-test/ . This is a comparative design benchmark, not a verified claim of global superiority; current source retrieval failed in this session and must be checked before submission.
-Mine localizes through Spanish instructions, MXN fictional financial data, inspectable cell evidence, visible uncertainties and retries, with human hiring judgment.
+## 7. Benchmark line
 
-## Long view
-If this slice works, SkillProof MX becomes a trusted library of narrow, verifiable entry-level tasks in Mexico. Employers could add validated criteria while candidates retain control over their latest evidence. Growth depends on demonstrated assessment validity, user demand and a sustainable human-review process.
+The best existing solution selected as my benchmark is TestGorilla's Microsoft Excel assessment, which evaluates spreadsheet skills and provides assessment reports; this selection is a design judgment, not a verified worldwide ranking. SkillProof MX differs through a narrow Spanish-language financial case with fictional MXN data, inspectable cell and formula evidence, explicit pending review and equivalent retries; Spanish alone is not a unique advantage because TestGorilla also has a Spanish offering.
 
-## Scope cut
-No marketplace, resume ranking, payments, automatic hiring, surveillance, claim of authorship verification, real candidate demo records, or guaranteed appeals service. Unsupported Excel formulas remain pending; formula presence alone is not proof. AI explanation output, if enabled or simulated, cannot establish verified numerical findings.
+Primary sources checked 5 November 2026:
+- https://www.testgorilla.com/test-library/software-skills-tests/microsoft-excel-skills-test/
+- https://www.testgorilla.com/es/catalogo-de-pruebas/conocimientos-de-software/prueba-de-microsoft-excel-general/
 
-## Architecture and stack
-| Layer | Required technology | Responsibility |
+Do not claim the benchmark lacks these features without testing or documentation.
+
+## 8. Long view — three sentences
+
+In three years, SkillProof MX could provide a library of narrow financial work samples with validated rubrics for Mexican entry-level hiring. Candidates would receive understandable evidence and a path to demonstrate improvement through reviewed equivalent cases. Expansion would depend on measured grading quality, a sustainable review operation and employer demand, with consequential hiring decisions remaining human.
+
+## 9. Scope cut and shadow condition
+
+No automatic hiring decisions, job-readiness certification, broad formula execution, authorship certification, surveillance, payments or new marketplace. No claimed operating savings, willingness to pay or retention from hypothetical behavior. Unsupported formulas and reasoning remain pending human review; unresolved rubric questions never become candidate penalties. A confirmed faulty rule triggers an audit of affected attempts and private notification through an available authorized channel. Reduce the number of reviewed cases rather than broaden unjustified automatic grading. No real personal data in demos, seeds or public evidence.
+
+## 10. Architecture and stack
+
+| Layer | Existing stack / planned addition | Responsibility |
 |---|---|---|
-| Interface | Next.js / React + Tailwind | Accessible upload and evidence report |
-| Server | Next.js route + Zod | Size/type validation and deterministic checks |
-| Workbook reader | fflate + fast-xml-parser | Read OOXML without executing macros or arbitrary code |
-| Identity | Supabase Auth / Google | Identify owner before persistence |
-| Persistence | Supabase Postgres + RLS | Owner-scoped reports, no source workbook retention |
-| Source | GitHub | Reviewable commits and packet history |
-| Hosting | Vercel free tier | Two real deployments and venture domain |
+| Interface | Next.js 16, React 19, TypeScript, Tailwind | Spanish task, evidence report, feedback |
+| API | Next.js routes, Zod | Validate inputs; compute bounded checks; retain provisional status |
+| Excel parsing | fflate, fast-xml-parser | Inspect OOXML without executing arbitrary workbook code |
+| Explanation | Existing Google GenAI integration and labeled simulated fallback | Advisory explanation only; never finalize reasoning without human review |
+| Identity and reports | Existing Supabase Auth and Postgres/RLS integration | Private ownership; verify live configuration and isolation |
+| Analytics | New small bounded event log | Task stages, errors, feedback, versions and return events |
+| Review measurement | Private structured pilot log | Baseline and assisted hands-on effort, elapsed turnaround and corrections |
+| Source and hosting | GitHub and Vercel free tiers | Reviewable history and real deployment evidence |
 
-Implementation status after the packet-first commit: Tailwind, the bounded evaluator, Google Auth integration, owner-scoped report save/retrieval and SQL RLS policies are coded. Supabase account configuration, OAuth, live data-isolation tests and the real-domain deployment remain unverified. No service setup is claimed by this packet.
+Inspection found the existing evaluation route adds explanation points into `total`; Week 13 must make provisional status explicit in API, UI, stored reports and exports. Existing code presence does not establish current live Auth/RLS correctness. Read installed Next.js guides before implementation as required by repository AGENTS.md.
 
-## Security floor and data handling
-Secrets only in Vercel environment variables; never in source, reports or transcript. Google sign-in before persisting personal information. RLS on reports with auth.uid() = user_id for all operations. Validate file extension, bytes, uncompressed content, expected worksheet, source values and explanation length. Fictional seeds only, visibly labeled. Workbook bytes stay in memory and are discarded. Reports stored privately; logout clears displayed sensitive data. Test user A versus user B reads and updates before live use.
+## 11. Analytics and feedback contract
 
-## Test plan
-1. Correct supported formulas, cached values missing: independently calculate supported expressions and verify evidence.
-2. Correct number hardcoded: accuracy may pass but formula evidence remains pending.
-3. Formula =1+1 with correct cached value: contradictory; never grant traceability for mere presence.
-4. Unsupported functions or external references: pending, no arbitrary execution.
-5. Altered source numbers: refuse the template rather than comparing against an unrelated fixed key.
-6. Missing cells, invalid extension, empty/corrupt/oversize archive: clear errors.
-7. Review button must not imply a real request or response SLA without a service.
-8. Export current report as JSON; confirm evidence and warnings persist.
-9. Supabase A/B ownership, signed-out access denied, saved report survives reload.
-10. Domain resolves, HTTPS works, Google OAuth redirect succeeds at the real domain.
+Proposed event names: `task_started`, `template_downloaded`, `submission_rejected`, `evaluation_completed`, `report_opened`, `feedback_submitted`, `equivalent_case_started`. Allowlist event names and bounded error codes; include timestamp, build identifier and case/rubric version. Use a consented pseudonymous participant code for pilot linkage; never put file names, workbook contents, explanation text, email addresses, tokens or raw errors in analytics. Separate technical logs from observed task success. Deduplicate return events; a reload is not proof of a meaningful repeat attempt.
 
-## Measurement
-Compare manual review, a simple rules checker and the core on the same fictional tasks. Include preparation, processing, inspection, correction and rework in elapsed effort. Record missed errors and false positives. 10:1 remains unproven until effort and quality both support it.
+Use an authenticated private store with ownership policies for persisted participant-linked records. Research notes and exact quotes remain private and require participant consent; publish only de-identified evidence. A free optional feedback form can capture a short confusion report, with length limits and an instruction not to enter personal information. No unrestricted public analytics dashboard.
 
-## Mechanical and persona passes
-Log a reproduced pre-fix failure, correction, retest and actual deployment IDs. Persona: Sofia, 23, recent Mexican graduate, basic Excel, fears permanent automated rejection. In a fresh chat show real screenshots in order, collect hesitation and abandonment points, fix the worst and retest. A plan or heuristic review is not a completed persona session.
+## 12. Security floor
 
-## Commit and deploy plan
-1 docs: charter and packet before core changes.
-2 test: reproduce misleading formula evidence.
-3 fix: independently inspect supported formulas and references.
-4 feat: show evidence states and export, remove unsupported service promises.
-5 docs: security setup, test results and session close.
-Deploy 1 after authenticated save works; deploy 2 after a documented bug fix and retest. Commit count is a real history requirement; local commits are not GitHub pushes.
+Keep secrets out of source and commit history; use deployment environment variables. Require Google sign-in before private persistence. Enable and verify RLS for every user-data table, including new analytics and feedback. Validate file size/type, archive contents, explanation length and all feedback/event fields on the server. Use visibly fictional seeds and screenshots. Check signed-out access and cross-account reads/writes; authorization must be enforced by the server/database, not by hiding UI controls. Record actual results before claiming the floor passes.
 
-## Submission status
-Live domain, GitHub URL, Vercel deployment IDs, Supabase ownership tests, fresh-chat persona, demo recording and complete transcript remain to be verified. No fabricated links, timestamps, users or deployment evidence.
+## 13. Mechanical test plan
 
-## Later verification addendum
-The preceding packet is the original plan and its historical status. See FINAL_STATUS_WEEK12.md for verified current results, benchmark source, commit/deployment links, A/B RLS test and unresolved submission gates. This does not retrospectively change the plan.
+| Test | Acceptance |
+|---|---|
+| Correct supported calculations | Expected values and traceable evidence; reasoning remains provisional |
+| Valid unsupported formula | Pending review without a demonstrated-error penalty |
+| Wrong supported calculation | Specific contradictory finding linked to cell and reference |
+| AI unavailable or simulated | Visible label; no automatic final reasoning grade |
+| Provisional report | UI, API, saved payload and export agree; no final pass/fail implication |
+| Invalid/corrupt/oversize submission | Specific bounded error; no persisted workbook or raw error leak |
+| Analytics | Allowlisted payloads, correct version, no prohibited content or duplicate return count |
+| Feedback | Length/type validation and clear saved/failed state |
+| Auth and isolation | Signed-out persistence blocked; B cannot read or modify A's data |
+| Reload/export/retry | Current report preserved accurately; attempts not silently mixed |
+
+Reproduce at least one actual failure, preserve pre-fix evidence, fix it, run the affected checks and redeploy. The provisional-total discrepancy is a code-inspection finding; reproduce the misleading behavior before reporting a tested fix.
+
+## 14. Synthetic persona — Layer 1
+
+Open a fresh chat: “You are Sofía, 23, a recent graduate in Mexico applying for junior financial analyst roles. You know basic Excel, worry that an automated score will permanently reject you and need to understand the next step. Use only the screenshots shown. Attempt the task aloud, state hesitation and where you would quit.” Show deployed screens in order. Preserve the confusion log; fix the worst issue and retest with screenshots from the corrected deployment. Synthetic findings remain separate from real participants.
+
+## 15. Five-user protocol — Layer 2
+
+Recruit relevant users as P01–P05, recording role and whether stranger or acquaintance without public names. Confirm at least three strangers and no classmates. Ask consent for observation and de-identified quotes; recording is optional and requires separate consent. Give the same neutral task: “Complete this fictional case, find your report and explain what the result does and does not establish.” Do not coach; record assistance when necessary. Ask what is verified, what needs review and what they would do next.
+
+For every session record date, deployment/version, role, relationship category, task, completion, candidate time, assistance, exact quote, observation and evidence location. Leave unobserved fields unfilled; do not turn paraphrases into quotes. Offer an equivalent reviewed second case after feedback when review capacity is confirmed. Record actual return or a consented signup/message precisely; interest alone is not retention.
+
+Rank the worst three findings first by grading harm, then task blockage/frequency, then candidate and operating effort. Each entry needs evidence, consequence for the value proposition, chosen action and retest result. Do not preselect a cosmetic issue as the highest pain before seeing the sessions.
+
+## 16. Operating measurement and 10:1 case
+
+Use the same case and rubric for manual and assisted review, with a qualified analyst reference. Record setup separately and allocate it over an explicit participant count. Include grading, reasoning review, unfamiliar formulas, support, corrections, appeals and second-review effort. Record hands-on time and elapsed turnaround separately; candidate effort is a separate measure. Counterbalance manual/assisted order where feasible and disclose learning effects.
+
+Time ratio = manual operating minutes per completed assessment / assisted operating minutes per completed assessment. Report quality alongside time, sample size, setup allocation and unfinished work; never substitute server response time for the full operating denominator. Twenty minutes per attempt is a planning budget only. A second equivalent case shows observed post-feedback performance; it does not prove transfer to all financial tasks.
+
+## 17. Implementation prompt and acceptance criteria
+
+Starting from the inspected Week 12 branch, preserve the original Packet under `docs/week12/`, then place this Week 13 plan in `docs/PACKET.md` before application edits. Inspect existing code and installed framework documentation first. Implement small independent changes: explicit provisional report status; bounded analytics; private optional feedback; review-effort and session templates. Keep all numerical checks within analyst-validated rules and tolerance limits. Do not widen scoring, promise staffed review, create results or mark research complete.
+
+Acceptance: all mechanical cases above pass; explanation cannot yield a final reviewed grade without recorded human review; analytics omit prohibited data; feedback and events enforce ownership; a reviewer can record actual effort privately; real-user and synthetic evidence are distinguishable. Test the full flow on the deployed version with fictional records.
+
+Planned substantive commits:
+1. Archive Week 12 Packet; commit Week 13 Packet and research protocol before code.
+2. Reproduce provisional-total discrepancy; correct API/UI/export semantics with regression coverage.
+3. Add validated private events and feedback with ownership checks.
+4. Add pilot/review measurement support; complete mechanical checks; deploy baseline.
+5. Fix the highest observed user pain; retest; deploy corrected version and preserve evidence.
+
+If real sessions are not yet available, finish the technical baseline and stop short of claiming commit 5 or the milestone complete. Record any additional commits honestly. Each session ends with DECISIONS.md, the next first move, commit and push; deployment records must reference actual commits.
+
+## 18. Evidence and hand-in ledger
+
+| Deliverable | Evidence required / current state |
+|---|---|
+| Packet before code | This plan; repository commit pending |
+| Live URL and owned domain | Supplied Vercel URL; owned domain unconfirmed |
+| Five real sessions | Not supplied or conducted in this conversation |
+| Top-three ranking and highest pain fix | Depends on sessions; no results claimed |
+| Return signal | No evidence supplied |
+| Persona PDF | Fresh-chat walkthrough and retest pending |
+| BuildChat PDF | Preserve actual full development back-and-forth |
+| Five commits / two deployments | Week 13 evidence pending |
+| Demo video | 3-minute live walkthrough plus 30 seconds on an actual mind-change |
+
+Source basis: supplied Week 13 Business Bending and Crystal Ball Brief; attached Team Blueprint; inspected repository files AGENTS.md, docs/PACKET.md, package.json and src/app/api/evaluate/route.ts on week12-core; official TestGorilla pages listed above. This is the pre-build plan, not a completion report.
