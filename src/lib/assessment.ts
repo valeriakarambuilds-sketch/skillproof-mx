@@ -109,7 +109,7 @@ export function parseWorkbook(buffer: ArrayBuffer): Record<string, { value?: num
   const sheet = parser.parse(strFromU8(sheetFile));
   const cells: Record<string, { value?: number; formula?: string }> = {};
   for (const row of list(sheet?.worksheet?.sheetData?.row)) {
-    for (const cell of list((row as { c?: unknown })?.c)) {
+    for (const cell of list((row as { c?: { "@_r"?: string; "@_t"?: string; v?: string; f?: string | { "#text"?: string } } | { "@_r"?: string; "@_t"?: string; v?: string; f?: string | { "#text"?: string } }[] })?.c)) {
       const address = cell?.["@_r"];
       if (!address || !/^[A-Z]{1,3}[1-9][0-9]*$/.test(address)) continue;
       const value = cell?.v === undefined || cell?.v === "" || (cell?.["@_t"] && cell["@_t"] !== "n") ? NaN : Number(cell.v);
