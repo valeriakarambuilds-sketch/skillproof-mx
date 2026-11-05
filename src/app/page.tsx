@@ -19,6 +19,7 @@ export default function Home() {
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [received, setReceived] = useState(false);
   const [review, setReview] = useState(false);
   const [authError,setAuthError]=useState("");
   const [token,setToken]=useState("");
@@ -27,7 +28,7 @@ export default function Home() {
     if(!supabase)return;
     const client=supabase;
     client.auth.getSession().then(({data})=>{setToken(data.session?.access_token||"");setReady(true);});
-    const {data}=client.auth.onAuthStateChange((_event,session)=>{setToken(session?.access_token||"");if(!session){setResult(null);setExplanation("");setFile(null);}});
+    const {data}=client.auth.onAuthStateChange((_event,session)=>{setToken(session?.access_token||"");if(!session){setResult(null);setExplanation("");setFile(null);setReceived(false);}});
     return ()=>data.subscription.unsubscribe();
   },[]);
   async function login(){
@@ -43,7 +44,7 @@ export default function Home() {
     }catch(caught){setAuthError(caught instanceof Error?caught.message:"No se pudo iniciar sesión con Google.");}
   }
   async function restore(){
-    setError("");
+    setReceived(false); setError("");
     try{const response=await fetch("/api/reports",{headers:{Authorization:`Bearer ${token}`},cache:"no-store"});const data=await response.json();if(!response.ok)throw new Error(data.error);if(data.report){setResult({...data.report.payload,total:null,reviewStatus:"pending_human_review",outcome:"Resultado provisional · revisión humana pendiente",saved:true,reportId:data.report.id});emitPilotEvent("report_opened");}else setError("Aún no tienes un reporte guardado.");}
     catch(caught){setError(caught instanceof Error?caught.message:"No se pudo recuperar el reporte.");}
   }
@@ -54,7 +55,7 @@ export default function Home() {
   }
 
   async function submit(event: FormEvent) {
-    event.preventDefault(); setError(""); setResult(null);
+    event.preventDefault(); setError(""); setResult(null); setReceived(false);
     if(supabase && !token)return setError("Inicia sesión con Google antes de evaluar.");
     if (!file) return setError("Selecciona tu archivo Excel.");
     setLoading(true);
@@ -63,7 +64,9 @@ export default function Home() {
       const response = await fetch("/api/evaluate", { method: "POST", body, headers:token?{Authorization:`Bearer ${token}`}:{}});
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "No pudimos evaluar tu evidencia.");
+      if (!Array.isArray(data.checks) || typeof data.outcome !== "string") throw new Error("No pudimos confirmar la evaluación. Revisa tu conexión y vuelve a intentarlo.");
       setResult(data);
+      setReceived(true);
       emitPilotEvent("evaluation_completed");
       emitPilotEvent("report_opened");
     } catch (caught) { emitPilotEvent("submission_rejected"); setError(caught instanceof Error ? caught.message : "Ocurrió un error."); }
@@ -109,11 +112,13 @@ export default function Home() {
 
         <form className="card upload" onSubmit={submit}>
           <p className="number">PASO 2</p><h2>Entrega tu evidencia</h2>
-          <label className="filebox"><input type="file" accept=".xlsx" onChange={(event) => setFile(event.target.files?.[0] || null)} /><span className="fileicon">X</span><span><b>{file ? file.name : "Selecciona tu archivo .xlsx"}</b><small>{file ? `${(file.size / 1024).toFixed(0)} KB · listo para evaluar` : "Máximo 2 MB. No aceptamos datos personales reales."}</small></span></label>
-          <p className="uploadhelp">Puedes seleccionar otro archivo antes de evaluar y repetir la prueba después de ver tu resultado.</p>
+          <label className="filebox"><input type="file" accept=".xlsx" disabled={loading} aria-describedby="delivery-help delivery-status" onChange={(event) => { setFile(event.target.files?.[0] || null); setResult(null); setReceived(false); setError(""); }} /><span className="fileicon">X</span><span><b>{file ? file.name : "Selecciona tu archivo .xlsx"}</b><small>{file ? `${(file.size / 1024).toFixed(0)} KB · seleccionado, aún no enviado` : "Máximo 2 MB. No aceptamos datos personales reales."}</small></span></label>
+          <p id="delivery-help" className="uploadhelp"><b>Debes entregar dos cosas:</b> tu archivo Excel en formato .xlsx y una explicación de tus decisiones. Seleccionar el archivo no lo envía. Completa la explicación y presiona “Enviar archivo y evaluar”.</p>
+          <p id="delivery-status" className="notice" role="status" aria-live="polite">{loading ? "Enviando y evaluando… Espera la confirmación; no vuelvas a presionar el botón." : received ? "Archivo recibido y evaluación generada. Consulta tu resultado provisional abajo." : error ? "No se confirmó una evaluación. Revisa el mensaje e intenta de nuevo; si hubo un problema de conexión, el envío pudo haber llegado al servidor." : file ? "Archivo seleccionado · aún no enviado. Falta presionar Enviar archivo y evaluar." : "Sin archivo seleccionado. Selecciona tu Excel .xlsx para empezar."}</p>
+          {Boolean(supabase && !token) && <p className="uploadhelp">Primero inicia sesión con Google en la parte superior para habilitar el envío.</p>}
           <label htmlFor="explanation"><b>Explica tu recomendación en 3–6 oraciones</b><small>¿Qué cambió entre 2025 y 2026? ¿Qué harías? Menciona una limitación de los datos, del periodo analizado o de algún supuesto.</small></label>
-          <textarea id="explanation" minLength={50} maxLength={1000} required value={explanation} onChange={(event) => setExplanation(event.target.value)} placeholder="Ejemplo: Aunque los ingresos…, el margen… Por eso recomiendo… Esta conclusión está limitada por…" />
-          <div className="formfoot"><span>{explanation.length}/1000 caracteres</span><button disabled={loading || !ready || Boolean(supabase && !token)}>{loading ? "Evaluando…" : "Evaluar mi evidencia →"}</button></div>
+          <textarea id="explanation" disabled={loading} minLength={50} maxLength={1000} required value={explanation} onChange={(event) => { setExplanation(event.target.value); setReceived(false); setResult(null); }} placeholder="Ejemplo: Aunque los ingresos…, el margen… Por eso recomiendo… Esta conclusión está limitada por…" />
+          <div className="formfoot"><span>{explanation.length}/1000 caracteres</span><button disabled={loading || !ready || Boolean(supabase && !token)}>{loading ? "Enviando y evaluando…" : "Enviar archivo y evaluar"}</button></div>
           {error && <p className="error" role="alert">{error}</p>}
         </form>
 
@@ -128,7 +133,7 @@ export default function Home() {
           <h3>Evidencia que encontramos</h3>
           <ul className="checks">{result.checks.map((check) => <li key={check.label}><span>{check.earned === check.possible ? "✓" : "!"}</span><div><b>{check.label}</b><span className="evidence-state">{check.status}</span><small>{check.evidence}</small><code>{check.address} · {check.formula || "Sin fórmula"}</code><small>Esperado: {check.expected} · Recalculado/valor: {check.actual ?? "Pendiente"}</small></div><strong>{check.earned}/{check.possible}</strong></li>)}</ul>
           <div className="limits"><b>Lo que esta prueba NO mide</b><p>No mide tu potencial, personalidad, contexto familiar, velocidad ni valor profesional. Solo presenta evidencia sobre esta tarea delimitada.</p></div>
-          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { emitPilotEvent("retry_started"); setResult(null); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
+          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { emitPilotEvent("retry_started"); setResult(null); setReceived(false); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
         </section>}
       </section>
 

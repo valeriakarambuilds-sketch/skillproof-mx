@@ -91,3 +91,12 @@ Google setup now completed by owner; successful upload, save, recovery and 86→
 - Tests: 12 pass; lint and production build pass. Public browser confirmed consent, local feedback confirmation and actual download. Two successful production deployment IDs and limitations are recorded in docs/TEST_LOG_WEEK13.md.
 - Human sessions, highest-pain fix, return evidence, fresh-chat persona, real reviewer availability, live Auth/RLS reverification and owned domain remain open. Do not count developer checks as users.
 - Next first move: verify Google sign-in and private save/reload with two test accounts; resolve database management access. Confirm analyst availability, then recruit P01–P05 and record observations before selecting the user-pain fix.
+
+
+## Week 13 upload-clarity correction
+
+Valeria supplied five de-identified participant summaries. P02 and P05 described selection-versus-submission confusion. Times and verbatim quotes remain pending; P05's account mixed future and past wording, so completion is not inferred.
+
+Implemented explicit .xlsx plus explanation requirements, selected/not-sent state, named send button, disabled inputs while evaluating, server-response-based receipt and separate save status. Input changes and retries clear the receipt to prevent stale confirmation. A network failure does not assert that no upload reached the server.
+
+Next first move: have P02 or P05 retest the deployed delivery workflow without coaching; record actual quote, time, version and before/after evidence, then collect a concrete return signal. Complete missing consent and session metadata and verify that none of P02–P05 is a classmate.
