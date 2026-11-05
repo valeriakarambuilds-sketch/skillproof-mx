@@ -81,3 +81,13 @@ Google setup now completed by owner; successful upload, save, recovery and 86→
 - Anonymous HTTP GET homepage returned 200; browser displayed SkillProof without Vercel login. Anonymous GET /api/reports returned 401 with sign-in-required error. Supabase auth/RLS retained.
 - Nine tests passed. Production uses existing production environment, including server-only Gemini settings; authenticated production evaluation was not retested in this release session.
 - Next first move: owner checks Google login, evaluation and private recovery on production; owned-domain and full submission gates remain separate.
+
+
+## Week 13 session close — 5 November 2026
+
+- Committed the Week 13 Packet before application edits on week13-real-humans; retained the Week 12 Packet archive.
+- Reproduced missing provisional status with a failing endpoint regression. Unreviewed reports now have null final total and explicit pending human review; advisory reasoning remains separate. Legacy restore and JSON export follow the same boundary.
+- Implemented a consented, bounded in-memory pilot log with optional feedback and explicit download; no automatic transmission or new database table. This replaces planned server analytics because the Supabase management query failed authentication.
+- Tests: 12 pass; lint and production build pass. Public browser confirmed consent, local feedback confirmation and actual download. Two successful production deployment IDs and limitations are recorded in docs/TEST_LOG_WEEK13.md.
+- Human sessions, highest-pain fix, return evidence, fresh-chat persona, real reviewer availability, live Auth/RLS reverification and owned domain remain open. Do not count developer checks as users.
+- Next first move: verify Google sign-in and private save/reload with two test accounts; resolve database management access. Confirm analyst availability, then recruit P01–P05 and record observations before selecting the user-pain fix.
