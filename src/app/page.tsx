@@ -22,9 +22,9 @@ export default function Home() {
   const [review, setReview] = useState(false);
   const [authError,setAuthError]=useState("");
   const [token,setToken]=useState("");
-  const [ready,setReady]=useState(false);
+  const [ready,setReady]=useState(!supabase);
   useEffect(()=>{
-    if(!supabase){setReady(true);return;}
+    if(!supabase)return;
     const client=supabase;
     client.auth.getSession().then(({data})=>{setToken(data.session?.access_token||"");setReady(true);});
     const {data}=client.auth.onAuthStateChange((_event,session)=>{setToken(session?.access_token||"");if(!session){setResult(null);setExplanation("");setFile(null);}});

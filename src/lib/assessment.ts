@@ -95,11 +95,11 @@ export function parseWorkbook(buffer: ArrayBuffer): Record<string, { value?: num
   const workbook = parser.parse(strFromU8(workbookFile));
   const relations = parser.parse(strFromU8(relationsFile));
   const sheets = list(workbook?.workbook?.sheets?.sheet);
-  const assessment = sheets.find((sheet: any) => sheet?.["@_name"] === "Assessment");
+  const assessment = sheets.find((sheet: Record<string, string>) => sheet?.["@_name"] === "Assessment");
   if (!assessment) throw new Error("No encontramos la hoja llamada Assessment.");
   const relationshipId = assessment["@_id"] || assessment["@_r:id"];
   const rels = list(relations?.Relationships?.Relationship);
-  const rel = rels.find((item: any) => item?.["@_Id"] === relationshipId);
+  const rel = rels.find((item: Record<string, string>) => item?.["@_Id"] === relationshipId);
   let target = rel?.["@_Target"] as string | undefined;
   if (!target) throw new Error("No pudimos leer la hoja Assessment.");
   target = target.replace(/^\//, "");
@@ -109,7 +109,7 @@ export function parseWorkbook(buffer: ArrayBuffer): Record<string, { value?: num
   const sheet = parser.parse(strFromU8(sheetFile));
   const cells: Record<string, { value?: number; formula?: string }> = {};
   for (const row of list(sheet?.worksheet?.sheetData?.row)) {
-    for (const cell of list((row as any)?.c)) {
+    for (const cell of list((row as { c?: unknown })?.c)) {
       const address = cell?.["@_r"];
       if (!address || !/^[A-Z]{1,3}[1-9][0-9]*$/.test(address)) continue;
       const value = cell?.v === undefined || cell?.v === "" || (cell?.["@_t"] && cell["@_t"] !== "n") ? NaN : Number(cell.v);
