@@ -6,7 +6,7 @@ import { supabase } from "@/lib/supabase-browser";
 
 type Result = {
   saved?:boolean; demo?:boolean; saveError?:string; reportId?:string;
-  total: number; outcome: string; accuracy: number; traceability: number;
+  total: number | null; reviewStatus?: string; numericalSubtotal?: number; outcome: string; accuracy: number; traceability: number;
   explanation: { score: number; feedback: string; evidence: string[]; simulated: boolean };
   checks: { label: string; earned: number; possible: number; evidence: string; address:string; formula?:string; expected:number; actual?:number; status:string }[];
   nextStep: string;
@@ -43,12 +43,12 @@ export default function Home() {
   }
   async function restore(){
     setError("");
-    try{const response=await fetch("/api/reports",{headers:{Authorization:`Bearer ${token}`},cache:"no-store"});const data=await response.json();if(!response.ok)throw new Error(data.error);if(data.report)setResult({...data.report.payload,saved:true,reportId:data.report.id});else setError("Aún no tienes un reporte guardado.");}
+    try{const response=await fetch("/api/reports",{headers:{Authorization:`Bearer ${token}`},cache:"no-store"});const data=await response.json();if(!response.ok)throw new Error(data.error);if(data.report)setResult({...data.report.payload,total:null,reviewStatus:"pending_human_review",outcome:"Resultado provisional · revisión humana pendiente",saved:true,reportId:data.report.id});else setError("Aún no tienes un reporte guardado.");}
     catch(caught){setError(caught instanceof Error?caught.message:"No se pudo recuperar el reporte.");}
   }
   function download(){
     if(!result)return;
-    const url=URL.createObjectURL(new Blob([JSON.stringify({venture:"SkillProof MX",fictionalData:true,...result},null,2)],{type:"application/json"}));
+    const url=URL.createObjectURL(new Blob([JSON.stringify({venture:"SkillProof MX",fictionalData:true,...result,total:null,reviewStatus:"pending_human_review"},null,2)],{type:"application/json"}));
     const link=document.createElement("a");link.href=url;link.download="SkillProof_MX_reporte.json";link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
 
@@ -99,7 +99,7 @@ export default function Home() {
           <section className="card rubric">
             <p className="number">ANTES DE EMPEZAR</p><h2>Así se calcula tu resultado</h2>
             <div><span>Exactitud de resultados</span><b>35 pts</b></div><div><span>Fórmulas trazables</span><b>25 pts</b></div><div><span>Interpretación y recomendación</span><b>30 pts</b></div><div><span>Claridad y límites</span><b>10 pts</b></div>
-            <p className="threshold"><b>70 puntos</b> = evidencia suficiente para avanzar</p>
+            <p className="threshold"><b>70 puntos</b> = referencia de rúbrica; requiere revisión humana completa</p>
           </section>
         </div>
 
@@ -114,9 +114,9 @@ export default function Home() {
         </form>
 
         {result && <section className="results" aria-live="polite">
-          <p className="notice"><b>Este reporte evalúa tu archivo, no decide tu contratación.</b> Puedes corregir las celdas y volver a enviar tu Excel. Pendiente significa que falta comprobación; no hay una revisión solicitada automáticamente.</p><div className="resulthead"><div className="score"><b>{result.total}</b><span>/100</span></div><div><p className="eyebrow">RESULTADO</p><h2>{result.outcome}</h2><p>{result.checks.every(check => check.status === "verificado") ? "Tus cálculos y referencias están verificados. Consulta abajo el alcance de la evaluación de tu explicación." : result.nextStep}</p></div></div>
-          {result.explanation.simulated && <p className="simulated">🎭 Total de demostración: {result.accuracy + result.traceability}/60 puntos provienen de los cálculos y sus referencias; {result.explanation.score}/40 son simulados mediante palabras clave y longitud. Este total no determina si avanzas en una contratación.</p>}
-          <div className="breakdown"><div><span>Exactitud</span><b>{result.accuracy}/35</b></div><div><span>Trazabilidad</span><b>{result.traceability}/25</b></div><div><span>Explicación</span><b>{result.explanation.score}/40</b></div></div>
+          <p className="notice"><b>Resultado provisional: falta revisión humana del razonamiento y de las fórmulas pendientes.</b> Puedes corregir las celdas y volver a enviar tu Excel. Pendiente significa que falta comprobación; no hay una revisión solicitada automáticamente.</p><div className="resulthead"><div className="score"><b>{result.accuracy + result.traceability}</b><span>/60 · cálculo</span></div><div><p className="eyebrow">RESULTADO</p><h2>{result.outcome}</h2><p>{result.checks.every(check => check.status === "verificado") ? "Tus cálculos y referencias están verificados. Consulta abajo el alcance de la evaluación de tu explicación." : result.nextStep}</p></div></div>
+          {result.explanation.simulated && <p className="simulated">🎭 Evaluación simulada: {result.accuracy + result.traceability}/60 puntos provienen de los cálculos y sus referencias; {result.explanation.score}/40 son simulados mediante palabras clave y longitud. Los puntos simulados no se suman a una calificación final. No se ha revisado tu razonamiento.</p>}
+          <div className="breakdown"><div><span>Exactitud</span><b>{result.accuracy}/35</b></div><div><span>Trazabilidad</span><b>{result.traceability}/25</b></div><div><span>Explicación · orientativa</span><b>{result.explanation.score}/40</b></div></div>
           <p>Verificado = cálculo y referencias comprobados en esta plantilla. Pendiente = falta evidencia o la fórmula requiere revisión. Contradictorio = el cálculo no coincide.</p>
           {result.saved?<p className="saved">Reporte guardado de forma privada. Puedes recuperarlo después de recargar.</p>:<p className="simulated">{result.saveError || "Este reporte no está guardado. Descárgalo para conservarlo."}</p>}
           <div className="feedback"><b>Sobre tu explicación</b><p>{result.explanation.simulated ? "Demostración con palabras clave y longitud; no se ha evaluado la calidad de tu argumento. La revisión de cifras, recomendaciones y limitaciones corresponde a una persona." : result.explanation.feedback}</p></div>

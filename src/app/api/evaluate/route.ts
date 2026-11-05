@@ -50,10 +50,14 @@ export async function POST(request: Request) {
       console.error("Gemini scoring failed", error instanceof Error ? error.message : "Unknown error");
       explanationResult = { ...simulatedExplanation(explanation), feedback: "La IA no respondió; mostramos una evaluación simulada y conservamos la evidencia verificable del Excel." };
     }
-    const total = clampScore(deterministic.accuracy + deterministic.traceability + explanationResult.score, 100);
+    const numericalSubtotal = deterministic.accuracy + deterministic.traceability;
     const payload = {
-      total,
-      outcome: "Reporte de evidencia de esta tarea",
+      total: null,
+      numericalSubtotal,
+      reviewStatus: "pending_human_review",
+      caseVersion: "financial-case-v1",
+      rubricVersion: "week13-v1",
+      outcome: "Resultado provisional · revisión humana pendiente",
       accuracy: deterministic.accuracy,
       traceability: deterministic.traceability,
       explanation: explanationResult,
