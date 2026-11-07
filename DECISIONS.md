@@ -100,3 +100,10 @@ Valeria supplied five de-identified participant summaries. P02 and P05 described
 Implemented explicit .xlsx plus explanation requirements, selected/not-sent state, named send button, disabled inputs while evaluating, server-response-based receipt and separate save status. Input changes and retries clear the receipt to prevent stale confirmation. A network failure does not assert that no upload reached the server.
 
 Next first move: have P02 or P05 retest the deployed delivery workflow without coaching; record actual quote, time, version and before/after evidence, then collect a concrete return signal. Complete missing consent and session metadata and verify that none of P02–P05 is a classmate.
+
+
+## Persona button-label correction — 7 November 2026
+
+The screenshot-based Sofia walkthrough found that “Solicitar revisión humana” suggested a request would be sent. The modal correctly disclosed that no request is sent, no reviewer is assigned and no response deadline is guaranteed. Changed only the button label to “Cómo pedir revisión humana”; the action still opens instructions. Application commit: dc86a9cff3e7bdc1bf250bbe4c9686739bd20cf3. Production deployment requested: dpl_29jUYEbh3Q8odiNHHB4CWrJG4yF8; readiness must be checked separately.
+
+Next first move: show the updated button to Sofia in the fresh persona chat and record what action she expects; do not claim the retest succeeded before receiving that response.
