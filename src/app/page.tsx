@@ -133,7 +133,7 @@ export default function Home() {
           <h3>Evidencia que encontramos</h3>
           <ul className="checks">{result.checks.map((check) => <li key={check.label}><span>{check.earned === check.possible ? "✓" : "!"}</span><div><b>{check.label}</b><span className="evidence-state">{check.status}</span><small>{check.evidence}</small><code>{check.address} · {check.formula || "Sin fórmula"}</code><small>Esperado: {check.expected} · Recalculado/valor: {check.actual ?? "Pendiente"}</small></div><strong>{check.earned}/{check.possible}</strong></li>)}</ul>
           <div className="limits"><b>Lo que esta prueba NO mide</b><p>No mide tu potencial, personalidad, contexto familiar, velocidad ni valor profesional. Solo presenta evidencia sobre esta tarea delimitada.</p></div>
-          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Solicitar revisión humana</button><button onClick={() => { emitPilotEvent("retry_started"); setResult(null); setReceived(false); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
+          <div className="actions"><button type="button" className="secondary" onClick={download}>Descargar reporte JSON</button><button className="secondary" onClick={() => setReview(true)}>Cómo pedir revisión humana</button><button onClick={() => { emitPilotEvent("retry_started"); setResult(null); setReceived(false); scrollTo({ top: 0, behavior: "smooth" }); }}>Corregir Excel o explicación y reintentar</button></div>
         </section>}
       </section>
 
