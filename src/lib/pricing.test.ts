@@ -33,3 +33,10 @@ describe('untrusted local storage',()=>{
   expect(parseScenarios(JSON.stringify({version:1,items:[{...item,name:'not retained'}]}))[0]).not.toHaveProperty('name');
  });
 });
+
+describe('saved numeric-only contract',()=>{
+ it('rejects edited storage containing numeric strings rather than silently coercing them',()=>{
+  const raw=JSON.stringify({version:1,items:[{id:'edited',createdAt:'2026-11-12T12:00:00Z',inputs:{...DEFAULTS,frequency:'0.25'}}]});
+  expect(()=>parseScenarios(raw)).toThrow();
+ });
+});

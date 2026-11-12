@@ -10,7 +10,7 @@ export const FIELDS = [
   { key: 'price', label: 'Precio por vacante', unit: 'MXN', max: 1000000, integer: false, hint: 'Oferta de referencia: $180; cambiar aquí solo cambia el escenario.' },
   { key: 'processing', label: 'Procesamiento por vacante', unit: 'MXN', max: 1000000, integer: false, hint: 'Supuesto de costo, no tarifa de un proveedor.' },
   { key: 'infrastructure', label: 'Infraestructura por vacante', unit: 'MXN', max: 1000000, integer: false, hint: 'Incluye el costo variable que corresponda.' },
-  { key: 'humanMinutes', label: 'Soporte y correcciones por vacante', unit: 'minutos', max: 10000, integer: false, hint: 'Contempla el trabajo humano incluido en la oferta.' },
+  { key: 'humanMinutes', label: 'Soporte y correcciones por vacante', unit: 'minutos', max: 10000, integer: false, hint: 'Modela tiempo humano futuro del servicio; no asigna un revisor.' },
   { key: 'hourlyCost', label: 'Costo de la hora humana', unit: 'MXN/hora', max: 1000000, integer: false, hint: 'Costo de atender el servicio; editable.' },
   { key: 'customization', label: 'Adaptación incluida por vacante', unit: 'MXN', max: 1000000, integer: false, hint: 'El piloto no incluye adaptaciones especiales.' },
   { key: 'fixed', label: 'Gastos fijos mensuales', unit: 'MXN/mes', max: 100000000, integer: false, hint: 'Cero no significa que no existan gastos fijos.' },
@@ -62,7 +62,9 @@ export function parseScenarios(raw: string | null): SavedScenario[] {
   const ids = new Set<string>();
   return parsed.items.map((item:unknown) => {
     if (!item || typeof item !== 'object' || !('id' in item) || typeof item.id !== 'string' || !/^[a-zA-Z0-9-]{1,80}$/.test(item.id) || ids.has(item.id) || !('createdAt' in item) || typeof item.createdAt !== 'string' || item.createdAt.length > 35 || !Number.isFinite(Date.parse(item.createdAt)) || !('inputs' in item)) throw new Error('Escenario local dañado.');
-    const { inputs } = validateInputs(item.inputs);
+    const stored = item.inputs;
+    if (!stored || typeof stored !== "object" || FIELDS.some(field => typeof (stored as Record<string,unknown>)[field.key] !== "number")) throw new Error("Los escenarios guardados deben contener solo números.");
+    const { inputs } = validateInputs(stored);
     if (!inputs) throw new Error('Un escenario contiene supuestos inválidos.');
     ids.add(item.id);
     return { id:item.id, createdAt:item.createdAt, inputs };
