@@ -1,183 +1,136 @@
-# SkillProof MX — Week 13 Packet
+# SkillProof MX - Week 14 Packet: pricing and saved scenarios
 
-Valeria Karam Galland | Real Humans | 5 November 2026
-
-Planning document prepared before Week 13 application changes. Baseline inspected: `week12-core`, tree `bd218f3b7b0eff9af0b6f0b6462c4c9e593d4c26`. Live URL: https://skillproof-mx.vercel.app/ . Repository: https://github.com/valeriakarambuilds-sketch/skillproof-mx . A custom owned domain is not confirmed. This document does not claim completed user sessions, fixes, deployments or review availability.
+Owner: Valeria Karam Galland. Lens: USER. Status: written before Week 14 implementation. Base: published Week 13 commit dc86a9c. Product URL of record: https://skillproof-mx.vercel.app. Repository: https://github.com/valeriakarambuilds-sketch/skillproof-mx, implementation branch week14-pricing.
 
 ## 1. Problem in my words
+An occasional employer reviewing junior analysts' Excel work needs to compare different methods and inspect evidence. Candidates need free access to their own results and a way to question errors. We do not yet know whether SkillProof saves review time or whether the proposed service can be delivered profitably. This slice states the price hypothesis, exposes its assumptions and lets a visitor save and recover numeric revenue scenarios without creating a false promise of payment or staffed review.
 
-Reviewing a junior financial analyst's Excel test requires checking calculations, formulas and reasoning. Automating calculations helps only if candidates understand the feedback and reviewers spend less time without overlooking valid alternative methods. A polished score can hide unresolved evidence; this week measures those failures with real users.
-
-## 2. Exact user
-
-Primary: Spanish-speaking students or recent graduates in Mexico interested in junior financial analyst roles, with basic Excel experience. Recruit five relevant participants, no classmates, including at least three strangers. Secondary: Valeria as pilot operator and a qualified analyst who validates the rubric and handles unresolved reasoning or formula questions. Analyst availability must be confirmed before collecting attempts that require promised review. Use fictional company data only.
+## 2. Exact users and payer
+- Candidate: recent graduate in Mexico applying for a junior financial analyst role; existing assessment remains free.
+- Operational user: person checking Excel submissions, possibly distinct from the payer.
+- Payer: employer budget holder. Segment A: small firms hiring occasionally. Segment B: employers with repeated junior-analyst vacancies; unvalidated secondary hypothesis.
+- Price basis: one vacancy, not a candidate, seat or automatic monthly subscription. Existing employer access to candidate reports is not introduced by this slice.
 
 ## 3. Success before the module closes
+A signed-out visitor can open /pricing and /about at the URL of record, distinguish the three options and two buyer segments, edit valid assumptions, see monthly and annualized gross plus contribution, save numeric scenarios on the current browser, reload and load/delete them. Invalid input clears output and prevents saving. The one-page memo uses the same baseline and price as pricing and the calculator. At least five meaningful commits and two READY deployments, including an observed fix and redeployment, are recorded. Independent human retest and genuine voluntary return remain separate evidence requirements, not synthetic-test claims.
 
-Five real participants attempt the same defined workflow without coaching: download the case, complete it, submit evidence, read feedback and explain what remains provisional. Record role, task, struggles, exact quotes, assistance, completion and version. Rank the three worst findings, fix the highest-priority pain, redeploy and retest that task with before/after evidence. Obtain one authentic return signal. Complete a separate fresh-chat synthetic-persona pass and a documented mechanical bug-fix-redeploy cycle. Publish at least five substantive commits and two actual deployments; capture their IDs rather than treating this plan as evidence.
+## 4. Offer and current capability boundary
+| Option | Price / unit | Proposed scope | Current boundary |
+|---|---|---|---|
+| Candidate | MXN 0 | Existing task and evidence report | Existing account rules apply to private reports; no candidate fee |
+| Vacancy pilot | MXN 180 / vacancy | Up to 20 equivalent assessments, 30 days | Price test, not an active purchase or staffed employer service |
+| Special adaptation | Quote after costing | Role-specific changes with defined scope | No fixed price, no active quote submission |
 
-Exploratory gates: zero observed confirmed grading-rule errors left unresolved; at least four of five participants independently distinguish verified calculations from pending human review. Five sessions cannot establish broad assessment validity or a universal saving.
+The two employer segments use the same per-vacancy test price until differentiated willingness to pay is evidenced. Do not quietly replace MXN 180 with Fernando's generic subscription prices. Basic results, criteria and the ability to question errors must not become paid candidate features. The existing review button gives instructions; no operational reviewer or response deadline is promised.
 
-## 4. Image-generated mockup
+## 5. Evidence and arithmetic
+Reported director conversation, paraphrased: files are reviewed manually; different methods are difficult to compare; he would try formula visibility and error review and would consider MXN 180 conditional on usefulness. Date, literal quotation, budget authority, actual payment and measured times have not been supplied. One reported conditional response is not a market estimate.
 
-Reuse the image-generated Week 12 evidence-report concept as the visual baseline; it is a design concept, not a screenshot or a new Week 13 generated asset.
+Illustrative same-task baseline: 20 candidates per vacancy; 10 manual hours vs 4 assisted hours including setup; MXN 300/hour; price MXN 180. Baseline = 3,000. Assisted labor = 1,200. Product total = 1,380. Net saving = 1,620. Gross time value/price = 1,800/180 = 10:1. Total-cost improvement = 3,000/1,380 = 2.17x. These ratios are different; none establishes measured ten-times-better performance. Do not monetize hiring quality, risk avoidance or more consistent review without evidence.
 
-![Existing generated evidence-report concept](https://raw.githubusercontent.com/valeriakarambuilds-sketch/skillproof-mx/week12-core/assets/week12-core-mockup.png)
+## 6. Simulator contract and defaults
+Monthly eligible businesses x conversion/100 = expected paying businesses. Multiply by average vacancies per paying business per month, then price per vacancy, to obtain monthly gross. Annualized gross = monthly gross x 12, explicitly assuming an unchanged month; not a cohort forecast. Fractional expected buyers/units are allowed and explained.
 
-Week 13 design delta: a prominent “Resultado provisional” notice; separate verified numerical checks and pending reasoning; specific next actions; a short optional feedback form. A return action may offer a reviewed equivalent case only when that case and reviewer are available. Do not imply that a button establishes a staffed appeal service.
+| Default | Value | Status |
+|---|---:|---|
+| Eligible employers | 100 | Illustrative assumption |
+| Conversion | 10% | Illustrative assumption, not observed conversion |
+| Vacancies / paying employer / month | 1 | Illustrative editable frequency |
+| Price / vacancy | MXN 180 | Unvalidated test offer |
+| Processing / vacancy | MXN 5 | Illustrative cost, not a provider quotation |
+| Infrastructure / vacancy | MXN 5 | Illustrative cost |
+| Support and correction / vacancy | 30 minutes | Illustrative human effort |
+| Human hourly cost | MXN 300 | Illustrative labor value |
+| Customization / vacancy | MXN 0 | No special adaptation included |
+| Fixed monthly overhead | MXN 0 | Not measured, editable; omitted overhead means no profit claim |
 
-## 5. Feature flow
+Variable unit cost = processing + infrastructure + human minutes/60 x hourly cost + included customization. Default unit cost = 160, contribution/unit = 20, monthly units = 10, monthly gross = 1,800, annualized gross = 21,600, contribution before fixed overhead = 200. Contribution is not net profit; tax treatment and real collection costs remain unverified. At zero gross, margin is undefined, not NaN. Invalid/blank/nonfinite/negative inputs yield no stale result; percentages limited to 0-100 and all fields bounded. Save at most ten validated numeric snapshots, automatic timestamps, no names, employer identifiers, free text or reports.
 
+## 7. Image-generated mockup
+![AI-generated planning mockup, not a live product screenshot](../assets/week14-pricing-mockup.jpg)
+
+Generation brief: Spanish SkillProof MX pricing page, white/navy/teal, Candidate Free; Vacancy pilot MXN 180, 20 assessments, 30 days; adaptation quoted. Editable users, conversion, frequency and price, gross 1,800 / annualized 21,600; scenario label, local save/load and no active billing. Generated before implementation. Cost assumptions will be added in the working version.
+
+## 8. Feature flow
 ```mermaid
 flowchart TD
- A[Open fictional case] --> B[Complete Excel and explanation]
- B --> C{Valid submission?}
- C -->|No| D[Specific error and retry]
- D --> B
- C -->|Yes| E[Check supported calculations]
- E --> F[Show provisional report]
- F --> G[Human reviews unresolved evidence]
- G --> H[Record reviewed result]
- F --> I[Optional feedback]
- H --> J[Offer equivalent case when available]
+  A[Open public pricing] --> B[Read scope and test price]
+  B --> C[Edit numeric assumptions]
+  C --> D{Valid inputs?}
+  D -->|No| E[Clear output and explain]
+  E --> C
+  D -->|Yes| F[Calculate gross and contribution]
+  F --> G{Save scenario?}
+  G -->|Yes| H[Validate and save locally]
+  H --> I[Reload and recover snapshot]
+  I --> C
+  G -->|No| J[Read memo and evidence limits]
+  F --> J
 ```
 
-## 6. Actor swimlane
-
+## 9. Actor swimlane
 ```mermaid
 flowchart TD
- subgraph Candidate
- A[Complete fictional task]
- B[Explain report and give feedback]
- C[Return for equivalent task]
- end
- subgraph Application
- D[Validate and check calculations]
- E[Show provisional status]
- F[Record bounded events]
- end
- subgraph Operator
- G[Observe without coaching]
- H[Rank pain and measure effort]
- I[Ship fix and retest]
- end
- subgraph Analyst
- J[Validate rubric]
- K[Review ambiguity and reasoning]
- end
- J --> D
- A --> D --> E --> B
- D --> F
- B --> G --> H --> I
- E --> K --> E
- B --> C
+  subgraph Visitor
+    A[Read offer and limits]
+    B[Edit assumptions]
+    C[Save or load scenario]
+    D[Compare memo]
+  end
+  subgraph Application
+    E[Validate bounded numbers]
+    F[Calculate scenario]
+    G[Explain status or storage failure]
+  end
+  subgraph Browser_Storage[Browser storage]
+    H[Store numeric snapshot only]
+    I[Return validated snapshots]
+  end
+  A --> B --> E --> F --> C
+  E -->|Invalid| G
+  C -->|Save| H
+  C -->|Load| I --> E
+  F --> D
 ```
+No AI or reviewer participates in numeric projections. A future correction service requires a separately defined human workflow and budget.
 
-## 7. Benchmark line
+## 10. Benchmark line
+Best existing reference for structured skills assessments: TestGorilla; its candidate guide documents assessment instructions, results and employer involvement. SkillProof localizes one inspectable Excel case in Spanish/MXN and tests employer payment per vacancy, with uncertainty and free correction access explicit; it does not claim incumbent absence from Mexico or a validated appeal-service advantage.
+Source checked 12 November 2026: https://candidates.testgorilla.com/hc/en-us/articles/19092940874395-Comprehensive-guide-to-taking-your-assessment . This is a reference choice, not an independently proven world ranking. The current guide says employer sharing can affect results visibility.
 
-The best existing solution selected as my benchmark is TestGorilla's Microsoft Excel assessment, which evaluates spreadsheet skills and provides assessment reports; this selection is a design judgment, not a verified worldwide ranking. SkillProof MX differs through a narrow Spanish-language financial case with fictional MXN data, inspectable cell and formula evidence, explicit pending review and equivalent retries; Spanish alone is not a unique advantage because TestGorilla also has a Spanish offering.
+## 11. Three-year long view
+SkillProof could become a small library of employer-validated Excel assessments for entry-level roles in Mexico. Candidates would control their current evidence while reviewers retain accountable judgment and correction routes. Expansion would depend on measured validity, fairness, employer demand and operational review capacity rather than permanent candidate labels.
 
-Primary sources checked 5 November 2026:
-- https://www.testgorilla.com/test-library/software-skills-tests/microsoft-excel-skills-test/
-- https://www.testgorilla.com/es/catalogo-de-pruebas/conocimientos-de-software/prueba-de-microsoft-excel-general/
+## 12. Scope cut
+No checkout, payment collection, renewal, employer dashboard, real candidate comparison, new AI scoring, new Supabase table, staffed appeal service or automatic rejection. No personal data in scenario storage. Do not claim actual annual revenue, retention, measured savings or completed independent human retests. Preserve the existing two-part submission, Google account flow and private reports.
 
-Do not claim the benchmark lacks these features without testing or documentation.
-
-## 8. Long view — three sentences
-
-In three years, SkillProof MX could provide a library of narrow financial work samples with validated rubrics for Mexican entry-level hiring. Candidates would receive understandable evidence and a path to demonstrate improvement through reviewed equivalent cases. Expansion would depend on measured grading quality, a sustainable review operation and employer demand, with consequential hiring decisions remaining human.
-
-## 9. Scope cut and shadow condition
-
-No automatic hiring decisions, job-readiness certification, broad formula execution, authorship certification, surveillance, payments or new marketplace. No claimed operating savings, willingness to pay or retention from hypothetical behavior. Unsupported formulas and reasoning remain pending human review; unresolved rubric questions never become candidate penalties. A confirmed faulty rule triggers an audit of affected attempts and private notification through an available authorized channel. Reduce the number of reviewed cases rather than broaden unjustified automatic grading. No real personal data in demos, seeds or public evidence.
-
-## 10. Architecture and stack
-
-| Layer | Existing stack / planned addition | Responsibility |
+## 13. Architecture and stack
+| Layer | Existing / selected technology | Responsibility |
 |---|---|---|
-| Interface | Next.js 16, React 19, TypeScript, Tailwind | Spanish task, evidence report, feedback |
-| API | Next.js routes, Zod | Validate inputs; compute bounded checks; retain provisional status |
-| Excel parsing | fflate, fast-xml-parser | Inspect OOXML without executing arbitrary workbook code |
-| Explanation | Existing Google GenAI integration and labeled simulated fallback | Advisory explanation only; never finalize reasoning without human review |
-| Identity and reports | Existing Supabase Auth and Postgres/RLS integration | Private ownership; verify live configuration and isolation |
-| Analytics | New small bounded event log | Task stages, errors, feedback, versions and return events |
-| Review measurement | Private structured pilot log | Baseline and assisted hands-on effort, elapsed turnaround and corrections |
-| Source and hosting | GitHub and Vercel free tiers | Reviewable history and real deployment evidence |
+| Public pages | Existing Next.js App Router, React, TypeScript | /pricing, /about, navigation |
+| Calculator | Pure TypeScript + bounded validation | Deterministic arithmetic, no AI |
+| Saved scenarios | Browser localStorage | Nonpersonal numeric snapshots, load/delete, failure feedback |
+| Styling | Existing CSS with scoped pricing classes | Responsive, keyboard-friendly fields |
+| Existing private reports | Supabase Google Auth + existing RLS | Preserve ownership; unchanged schema |
+| Hosting / versioning | Existing Vercel project + GitHub | Same canonical domain, five commits/two deploys |
+| Tests | Existing Vitest + Next build | Boundary, roundtrip, corruption and arithmetic tests |
 
-Inspection found the existing evaluation route adds explanation points into `total`; Week 13 must make provisional status explicit in API, UI, stored reports and exports. Existing code presence does not establish current live Auth/RLS correctness. Read installed Next.js guides before implementation as required by repository AGENTS.md.
+## 14. Security floor
+No new secrets; server secrets stay in deployment environment. Public calculator saves only numbers locally. Existing personal reports require verified server auth and owner-restricted RLS; read source and inspect deployed configuration where available, do not claim a live A/B retest without running it. Every new input has type/range limits; saved JSON is untrusted on load and validated. Labels and demo values are fictional. No auth state or personal report is exported into public evidence.
 
-## 11. Analytics and feedback contract
+## 15. Two-pass test plan
+Mechanical: known default outputs; zero users/conversion/price; 0 and 100% conversion; blank/negative/Infinity/excessive values; fractional expected volumes; negative contribution; save/reload/load/delete; invalid JSON, unsupported versions and storage failure; /pricing and /about anonymous GET; mobile overflow; existing tests/build; one real observed defect fixed and redeployed. Record exact commands, result, commit and deploy IDs.
 
-Proposed event names: `task_started`, `template_downloaded`, `submission_rejected`, `evaluation_completed`, `report_opened`, `feedback_submitted`, `equivalent_case_started`. Allowlist event names and bounded error codes; include timestamp, build identifier and case/rubric version. Use a consented pseudonymous participant code for pilot linkage; never put file names, workbook contents, explanation text, email addresses, tokens or raw errors in analytics. Separate technical logs from observed task success. Deduplicate return events; a reload is not proof of a meaningful repeat attempt.
+Synthetic persona in a fresh chat: Lucia, 38, fictional operations manager at a small Mexican advisory firm, hires occasionally, basic Excel, wants to know whether 180 is monthly, whether review is staffed and where saved scenarios live. Walk actual screens in order, log hesitations, fix worst issue and retest. Synthetic persona results are never real payer evidence. If a fresh-chat screenshot walkthrough is not run, mark it pending rather than invent success.
 
-Use an authenticated private store with ownership policies for persisted participant-linked records. Research notes and exact quotes remain private and require participant consent; publish only de-identified evidence. A free optional feedback form can capture a short confusion report, with length limits and an instruction not to enter personal information. No unrestricted public analytics dashboard.
+## 16. Week 13 feedback carried forward
+Professor score: public product 4/4; packet 2/2; Blueprint/validation 1/2; fix/redeploy 1/1; conversation 1/1 = 9/10. Participant accounts do not establish the full stranger/session record. An invited follow-up is not a voluntary return. Keep the existing P01-P05 ledger with missing fields explicitly pending. Independent retest: observe the two-item submission without coaching, record exact words, build, consent, assistance, task result and where the correction still fails. Record voluntary return separately only if genuinely initiated by the user. These are real-user tasks Valeria must carry out; developer checks do not close them.
 
-## 12. Security floor
+## 17. Commit / deployment plan
+1. docs: packet, mockup, diagrams, prompt and evidence boundaries BEFORE code.
+2. feat: shared assumptions and deterministic scenario model.
+3. feat: public pricing, memo and saved scenarios; deploy A.
+4. fix: observed mechanical/persona defect with regression evidence; deploy B.
+5. docs: exact test/deployment results and Session Close; commit and push.
 
-Keep secrets out of source and commit history; use deployment environment variables. Require Google sign-in before private persistence. Enable and verify RLS for every user-data table, including new analytics and feedback. Validate file size/type, archive contents, explanation length and all feedback/event fields on the server. Use visibly fictional seeds and screenshots. Check signed-out access and cross-account reads/writes; authorization must be enforced by the server/database, not by hiding UI controls. Record actual results before claiming the floor passes.
-
-## 13. Mechanical test plan
-
-| Test | Acceptance |
-|---|---|
-| Correct supported calculations | Expected values and traceable evidence; reasoning remains provisional |
-| Valid unsupported formula | Pending review without a demonstrated-error penalty |
-| Wrong supported calculation | Specific contradictory finding linked to cell and reference |
-| AI unavailable or simulated | Visible label; no automatic final reasoning grade |
-| Provisional report | UI, API, saved payload and export agree; no final pass/fail implication |
-| Invalid/corrupt/oversize submission | Specific bounded error; no persisted workbook or raw error leak |
-| Analytics | Allowlisted payloads, correct version, no prohibited content or duplicate return count |
-| Feedback | Length/type validation and clear saved/failed state |
-| Auth and isolation | Signed-out persistence blocked; B cannot read or modify A's data |
-| Reload/export/retry | Current report preserved accurately; attempts not silently mixed |
-
-Reproduce at least one actual failure, preserve pre-fix evidence, fix it, run the affected checks and redeploy. The provisional-total discrepancy is a code-inspection finding; reproduce the misleading behavior before reporting a tested fix.
-
-## 14. Synthetic persona — Layer 1
-
-Open a fresh chat: “You are Sofía, 23, a recent graduate in Mexico applying for junior financial analyst roles. You know basic Excel, worry that an automated score will permanently reject you and need to understand the next step. Use only the screenshots shown. Attempt the task aloud, state hesitation and where you would quit.” Show deployed screens in order. Preserve the confusion log; fix the worst issue and retest with screenshots from the corrected deployment. Synthetic findings remain separate from real participants.
-
-## 15. Five-user protocol — Layer 2
-
-Recruit relevant users as P01–P05, recording role and whether stranger or acquaintance without public names. Confirm at least three strangers and no classmates. Ask consent for observation and de-identified quotes; recording is optional and requires separate consent. Give the same neutral task: “Complete this fictional case, find your report and explain what the result does and does not establish.” Do not coach; record assistance when necessary. Ask what is verified, what needs review and what they would do next.
-
-For every session record date, deployment/version, role, relationship category, task, completion, candidate time, assistance, exact quote, observation and evidence location. Leave unobserved fields unfilled; do not turn paraphrases into quotes. Offer an equivalent reviewed second case after feedback when review capacity is confirmed. Record actual return or a consented signup/message precisely; interest alone is not retention.
-
-Rank the worst three findings first by grading harm, then task blockage/frequency, then candidate and operating effort. Each entry needs evidence, consequence for the value proposition, chosen action and retest result. Do not preselect a cosmetic issue as the highest pain before seeing the sessions.
-
-## 16. Operating measurement and 10:1 case
-
-Use the same case and rubric for manual and assisted review, with a qualified analyst reference. Record setup separately and allocate it over an explicit participant count. Include grading, reasoning review, unfamiliar formulas, support, corrections, appeals and second-review effort. Record hands-on time and elapsed turnaround separately; candidate effort is a separate measure. Counterbalance manual/assisted order where feasible and disclose learning effects.
-
-Time ratio = manual operating minutes per completed assessment / assisted operating minutes per completed assessment. Report quality alongside time, sample size, setup allocation and unfinished work; never substitute server response time for the full operating denominator. Twenty minutes per attempt is a planning budget only. A second equivalent case shows observed post-feedback performance; it does not prove transfer to all financial tasks.
-
-## 17. Implementation prompt and acceptance criteria
-
-Starting from the inspected Week 12 branch, preserve the original Packet under `docs/week12/`, then place this Week 13 plan in `docs/PACKET.md` before application edits. Inspect existing code and installed framework documentation first. Implement small independent changes: explicit provisional report status; bounded analytics; private optional feedback; review-effort and session templates. Keep all numerical checks within analyst-validated rules and tolerance limits. Do not widen scoring, promise staffed review, create results or mark research complete.
-
-Acceptance: all mechanical cases above pass; explanation cannot yield a final reviewed grade without recorded human review; analytics omit prohibited data; feedback and events enforce ownership; a reviewer can record actual effort privately; real-user and synthetic evidence are distinguishable. Test the full flow on the deployed version with fictional records.
-
-Planned substantive commits:
-1. Archive Week 12 Packet; commit Week 13 Packet and research protocol before code.
-2. Reproduce provisional-total discrepancy; correct API/UI/export semantics with regression coverage.
-3. Add validated private events and feedback with ownership checks.
-4. Add pilot/review measurement support; complete mechanical checks; deploy baseline.
-5. Fix the highest observed user pain; retest; deploy corrected version and preserve evidence.
-
-If real sessions are not yet available, finish the technical baseline and stop short of claiming commit 5 or the milestone complete. Record any additional commits honestly. Each session ends with DECISIONS.md, the next first move, commit and push; deployment records must reference actual commits.
-
-## 18. Evidence and hand-in ledger
-
-| Deliverable | Evidence required / current state |
-|---|---|
-| Packet before code | This plan; repository commit pending |
-| Live URL and owned domain | Supplied Vercel URL; owned domain unconfirmed |
-| Five real sessions | Not supplied or conducted in this conversation |
-| Top-three ranking and highest pain fix | Depends on sessions; no results claimed |
-| Return signal | No evidence supplied |
-| Persona PDF | Fresh-chat walkthrough and retest pending |
-| BuildChat PDF | Preserve actual full development back-and-forth |
-| Five commits / two deployments | Week 13 evidence pending |
-| Demo video | 3-minute live walkthrough plus 30 seconds on an actual mind-change |
-
-Source basis: supplied Week 13 Business Bending and Crystal Ball Brief; attached Team Blueprint; inspected repository files AGENTS.md, docs/PACKET.md, package.json and src/app/api/evaluate/route.ts on week12-core; official TestGorilla pages listed above. This is the pre-build plan, not a completion report.
+Session Close updates DECISIONS.md with decisions, limits and tomorrow's first move. Future changes repeat this close.

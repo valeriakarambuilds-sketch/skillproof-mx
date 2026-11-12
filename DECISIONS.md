@@ -100,3 +100,10 @@ Valeria supplied five de-identified participant summaries. P02 and P05 described
 Implemented explicit .xlsx plus explanation requirements, selected/not-sent state, named send button, disabled inputs while evaluating, server-response-based receipt and separate save status. Input changes and retries clear the receipt to prevent stale confirmation. A network failure does not assert that no upload reached the server.
 
 Next first move: have P02 or P05 retest the deployed delivery workflow without coaching; record actual quote, time, version and before/after evidence, then collect a concrete return signal. Complete missing consent and session metadata and verify that none of P02–P05 is a classmate.
+
+## Week 14 - packet before implementation
+- Base: published dc86a9c, not outdated main. Work branch week14-pricing.
+- Price remains an unvalidated MXN 180/vacancy test. No checkout or review-service guarantee.
+- Browser scenarios contain bounded numbers only; existing Google Auth/RLS flow is preserved.
+- Week 13 feedback: 9/10; independent retest, stranger/session evidence and voluntary return remain open, distinct from synthetic tests.
+- Tomorrow's first move: obtain independent no-coaching retest and preserve exact observations; never count an invitation as voluntary return.
