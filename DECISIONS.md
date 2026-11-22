@@ -127,3 +127,11 @@ Next first move: have P02 or P05 retest the deployed delivery workflow without c
 - Keep the original build exchange complete. Run an independent fresh-state candidate regression and a fresh synthetic reviewer walkthrough. Record real outreach behavior only after it occurs.
 
 - Continue from the Week 14 pricing branch to carry forward the authenticated candidate journey. The reviewer demo is a separate read-only page. Use the original outreach email for opt-in replies and an in-page cell check for demo visitors.
+
+### Week 15 reviewer demo verification — 22 November 2026
+
+- Integrated `/demo-revision` at `1721b4486e01a874a42b53fc7d9d8d7d9be22159`. Its Vercel preview is ready and remains behind Vercel authentication.
+- Evaluator release: https://skillproof-mx-demo-revision.vercel.app/ . This static version contains the comparison and three downloadable synthetic workbooks. It has no candidate routes, credentials, upload, or data store.
+- Signed-out HTTP verification returned the expected comparison, three matching EBITDA amounts, two traceable labels and one review label. All three XLSX downloads returned 200 and matched the original fixture bytes. The fixture structure, formulas and stored values were checked programmatically. The public demo illustrates the intended review policy with fixed data.
+- All 34 existing tests and targeted lint passed. Repository-wide lint reports a pre-existing error in RevenueSimulator. The local Next.js build compiled the routes and then reported a security upgrade requirement. The public static release does not ship the framework runtime.
+- The generated image is a layout concept. The implemented screen and fixture files are authoritative for cell references and formulas. Browser interaction, Excel desktop recalculation, the independent candidate regression and the real-audience distribution test remain to be documented.
