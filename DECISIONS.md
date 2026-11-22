@@ -117,3 +117,13 @@ Next first move: have P02 or P05 retest the deployed delivery workflow without c
 - No active billing or staffed review. Price, workload, conversions and10:1 premises remain assumptions. Persona is synthetic; no independent human retest, stranger/session completion or voluntary return is claimed.
 - Tomorrow's first move: run the professor's independent uncoached retest, capture exact observations including remaining failures, complete missing de-identified session fields, and record a voluntary return only if independently initiated. Record the3:30 demo at the canonical URL.
 - Remote source synchronized through connected GitHub API because terminal has no push credentials. Final documentation and public evidence are committed separately after the two code deployments; docs-only final commit does not require a new runtime deployment.
+
+## Week 15 — Distribution kickoff
+
+- Follow the Fusion decision: focus on the finance reviewer after files arrive and demonstrate a pasted EBITDA, a direct formula and a formula through an intermediate sheet with the same result.
+- Treat the two valid formulas equally. Route an incomplete trace to manual Excel review with score and eligibility preserved pending review.
+- The first outreach test proposes carousel plus screen recording via individual email. Treat the CTA response as interest. Any time-savings test must include upload and manual Excel review.
+- Next move: verify the Week 13 source evidence and build three synthetic fixtures from the existing financial case. Generate the design mockup, verify cell trails in Excel, and test the signed-out demo and CTA before outreach.
+- Keep the original build exchange complete. Run an independent fresh-state candidate regression and a fresh synthetic reviewer walkthrough. Record real outreach behavior only after it occurs.
+
+- Continue from the Week 14 pricing branch to carry forward the authenticated candidate journey. The reviewer demo is a separate read-only page. Use the original outreach email for opt-in replies and an in-page cell check for demo visitors.
