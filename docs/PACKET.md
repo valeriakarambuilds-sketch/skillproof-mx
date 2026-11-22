@@ -134,3 +134,71 @@ Professor score: public product 4/4; packet 2/2; Blueprint/validation 1/2; fix/r
 5. docs: exact test/deployment results and Session Close; commit and push.
 
 Session Close updates DECISIONS.md with decisions, limits and tomorrow's first move. Future changes repeat this close.
+
+# Week 15 — Distribution
+
+**Builder:** Valeria Karam · **Lens:** Adversary · **Status:** Pre-build plan
+
+## Problem, exact user and positioning
+
+A finance reviewer at a small Mexican firm has already received Excel cases for a junior analyst vacancy. When three workbooks agree on EBITDA, the reviewer still has to open each one to learn how the answer was built. Start with a reviewer in that situation, such as someone at BIE reviewing an active analyst search. SkillProof MX shows the formula trail and where to inspect it in Excel. One Week 13 sample displayed formula evidence. The director's Week 14 feedback indicated conditional interest in seeing formulas and checking errors. The Week 15 Fusion surfaced the risk of being read as a candidate grading tool. **Promise withheld:** measured time savings. A later comparison must count upload and manual Excel review.
+
+## Success and scope
+
+- In a signed-out synthetic demo, hold EBITDA at MXN 1,600,000 across three workbooks: pasted value, direct formula and formula via an intermediate sheet. Display the sheet and cell trail for both valid methods and treat them equally. Flag incomplete traces for Excel review and preserve score and eligibility pending manual review.
+- Publish three pieces across at least two formats after human approval. Put two pieces in front of the target audience in one channel and record observed behavior. Proposed learning signal: one reviewer can identify the incomplete trail and requests the next step for a live or recent analyst vacancy. Zero responses is a valid outcome.
+- Keep the candidate journey and its access controls. This sprint excludes public upload of hiring workbooks, new candidate scoring, new hiring rules, a paid automation framework and pricing changes.
+
+## Architecture and mockup
+
+Reuse the existing Next.js / React app, server-side XLSX parsing and validation using fflate, fast-xml-parser and Zod. Proposed public route: read-only synthetic fixtures and no upload. Reuse a working secure capture option if available. Otherwise test an explicit opt-in reply through the same channel, with an evaluator-accessible demo link. Keep real files and contact details out of the public route and submission. Verify authentication and row-level access for any existing personal-data store used by the sprint. Keep secrets server-side and validate all inputs before processing.
+
+**Image-generated mockup brief (pending generation):** Desktop reviewer view in Spanish. Three side-by-side workbook rows each show MXN 1,600,000. First row says “Revisar en Excel” with a cell location, second shows a direct formula, third expands an intermediate-sheet trail. Label “Ejemplo simulado.” End with “Solicitar una prueba guiada.” Use the palette below, no candidate names. Treat the generated image as a design reference and verify every displayed formula in the implementation separately.
+
+```mermaid
+flowchart TD
+    A["Valeria prepares synthetic workbooks"] --> B["Valeria verifies formulas in Excel"]
+    B --> C["Reviewer opens demo"]
+    C --> D["SkillProof shows result and cell trail"]
+    D --> E{"Trail complete?"}
+    E -->|Yes| F["Reviewer inspects either valid method"]
+    E -->|No| G["Reviewer checks the cell in Excel"]
+    F --> H["Reviewer can request a guided test"]
+    G --> H
+```
+
+**Benchmark and local adaptation:** Benchmark the demo against a reviewer using Excel's formula bar and precedent tracing on the same files. Keep the reviewer in Excel for final verification. Adapt the examples to Mexican Spanish, MXN and the point at which a small finance team already has submissions.
+
+**Three-year direction:** Year 1 tests whether trace comparisons help small Mexican finance teams. Year 2 explores authenticated reviewer workspaces if pilots show repeat use. Year 3 explores other Excel-heavy analyst roles after checking equivalence and manual oversight for each rubric.
+
+## Launch playbook
+
+**Voice rules:** (1) Lead with the review task. (2) Point to a number, formula, worksheet or pending check. (3) Give the next action in plain Mexican Spanish.
+
+**Rewrite:** “Contrata más rápido con IA” → “Tres archivos llegan al mismo EBITDA. Abre las celdas y compara cómo lo calculó cada uno.”
+
+**Visual system:** Navy #14283F for titles, warm white #F7F8FA for backgrounds, teal #00695C for traceable paths and amber #8A5100 for review labels. Show text labels with every status. Use Inter bold for headlines, Inter regular for instructions and IBM Plex Mono for cells and formulas. Repeat the same order: reviewer question, workbook evidence, review action. Spanish labels, MXN and familiar Excel references make the content easy to use during a Mexican analyst search.
+
+| Recurring series | First concept to finish | Second concept (sketch) |
+| --- | --- | --- |
+| Mismo resultado, distinto método | Three-workbook comparison as a carousel. Planned outreach piece A. | Which equivalent method would you open first when margins match? |
+| Abre la celda | Short screen recording tracing an intermediate sheet. Planned outreach piece B. | How to locate the source cell when a formula crosses sheets. |
+| Qué reviso antes de decidir | One-page checklist for a pasted value, incomplete trail and human follow-up. | What to do when a reviewer cannot reproduce a reference. |
+
+**Input → method → output:** Start with the Week 13 displayed Excel evidence for EBITDA 2026 of MXN 1,600,000. Verify its source evidence before production. Recreate the amount in three labeled synthetic fixtures based on the established fictional financial case: 12,000,000 − 8,100,000 − 2,300,000. Compare a pasted result, direct subtraction and gross profit from an intermediate sheet less operating expenses. The useful output is a card and demo trail telling a reviewer exactly where to check each file. The three-file comparison is proposed for Week 15.
+
+| Role | Input | Output | Quality check |
+| --- | --- | --- | --- |
+| Research | Blueprint, prior reviewer feedback and Week 13 evidence | Reviewer moment, claim list and source notes | Each claim tied to an observation or labeled hypothesis |
+| Writing | Source notes and voice rules | Carousel copy, narration and checklist | Each piece contains a concrete review action |
+| Visual production | Approved copy and synthetic workbook screenshots | Carousel, screen recording and checklist | Readable formulas and visible simulation label |
+| Evidence checking | Drafts and three fixtures | Verified results and cell trails | Open the files in Excel, verify both formulas and check claims |
+| Style review | Verified assets and palette | Marked edits | Consistent Spanish, labels and CTA across formats |
+| Revision | Marked edits and test observations | Final versions | Valeria checks corrections and approves before publication |
+
+## Tests and evidence
+
+- **Mechanical:** Recalculate all three workbooks in Excel. Check equal treatment of both formula paths, the pasted-value review flag and score/eligibility behavior. Open the release and click the CTA signed out. Verify sample labels, lack of real data and that any saved personal information is access-controlled. Record expected and observed behavior and the tested URL and build.
+- **Persona:** Use a fresh original chat with a synthetic finance reviewer grounded in the Blueprint and the director's feedback. Ask the reviewer to identify what differs, locate a precedent and interpret the pasted-value flag and CTA. Record exact observations. Separately rerun Ramsey's requested candidate regression with fresh state and a synthetic workbook: sign in, submit, inspect, retry and reopen the saved report. Fix and independently retest any reproduced issue. Keep persona evidence in PERSONA and distinguish it from outreach.
+- **Distribution:** Proposed channel is individual email to finance reviewers who agree to receive the example. Send carousel and clip with the same working next action, a guided test request. Before sending, verify the demo and CTA and record the test window. Record pieces, delivered messages, observed clicks if measured, replies and opt-ins with aggregate counts only. Record expected behavior, observed behavior and the next change. As of this plan, outreach is pending and results are unmeasured.
+- **Submission:** Reuse verified history for at least five commits and two deployments. Keep the complete original development conversation in its original language, with any translation labeled, and verify evaluator access signed out. Demo: three-minute walkthrough plus 30 seconds on the change of mind. Include launch and test evidence in the existing Packet, Persona, BuildChat and demo submissions.
