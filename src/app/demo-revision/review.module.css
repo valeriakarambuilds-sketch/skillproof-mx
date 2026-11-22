@@ -1,0 +1,116 @@
+.page {
+  background: #f7f8fa;
+  color: #14283f;
+  padding: 2.5rem clamp(1rem, 5vw, 5rem) 4rem;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 72rem;
+}
+
+.brand {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #dfe5ee;
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.tag {
+  color: #00695c;
+  font-weight: 750;
+  margin: 2.5rem 0 .75rem;
+}
+
+.lead {
+  max-width: 42rem;
+  color: #455569;
+  line-height: 1.6;
+  font-size: 1.125rem;
+}
+
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.card, .practice {
+  background: #fff;
+  border: 1px solid #dfe5ee;
+  border-radius: 1rem;
+  padding: 1.35rem;
+}
+
+.card h2 {
+  font-size: 1.125rem;
+}
+
+.filename, .trail, .practice code {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  overflow-wrap: anywhere;
+  font-size: .875rem;
+}
+
+.filename, .followup {
+  color: #455569;
+}
+
+.amount {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 1rem 0 .5rem;
+}
+
+.amount small {
+  font-size: .875rem;
+}
+
+.review, .valid {
+  display: inline-block;
+  border-radius: .375rem;
+  padding: .35rem .55rem;
+  font-size: .875rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.review {
+  background: #fff2db;
+  color: #8a5100;
+}
+
+.valid {
+  background: #e7f5ef;
+  color: #00695c;
+}
+
+.trail {
+  padding-left: 1.2rem;
+}
+
+.card details p, .note, .practice p {
+  line-height: 1.55;
+}
+
+.note {
+  border-left: 3px solid #00695c;
+  padding-left: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.practice {
+  max-width: 46rem;
+}
+
+.followup {
+  margin-bottom: 0;
+}
+
+@media (max-width: 850px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
